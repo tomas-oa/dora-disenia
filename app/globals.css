@@ -1,26 +1,37 @@
 @import "tailwindcss";
+@plugin "tailwindcss-debug-screens";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: "Host Grotesk", system-ui, sans-serif;
+  --font-display: "coolvetica", system-ui, sans-serif;
+  --font-mono: monospace;
+
+  --color-dora-white: #fffcf7;
+  --color-dora-sky: #0193ff;
+  --color-dora-pink: #ff77e6;
+  --color-dora-red: #fe2e00;
+  --color-dora-yellow: #fff90d;
+  --color-dora-orange: #ff5309;
+  --color-dora-green: #ccffcc;
+  --color-dora-violet: #ffbaa9;
+  --color-dora-blue: #0768ff;
+
+  --animate-spin: spin 15s linear infinite;
+  --animate-bounce: bounce 2s linear infinite;
+
+  --scrollbar-hide: scrollbar-hide;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@utility scrollbar-hidden {
+  &::-webkit-scrollbar {
+    @apply hidden;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility p-container {
+  @apply p-8 md:p-14 lg:p-20;
+}
+
+@utility px-container {
+  @apply px-8 md:px-14 lg:px-20;
 }

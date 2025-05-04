@@ -1,0 +1,9 @@
+{
+  "clsx": {
+    "scope": "javascript,typescript,javascriptreact,typescriptreact,html",
+    "prefix": "clsx",
+    "body": [
+      "className={clsx($1)}",
+    ]
+  }
+}
