@@ -22,6 +22,8 @@ import frankenstein_4 from "@/public/frankenstein/4.gif";
 import frankenstein_5 from "@/public/frankenstein/5.png";
 import frankenstein_cover from "@/public/frankenstein/cover.png";
 
+export const ICON_ARROW_DOWN = "↓";
+
 export const HREF_MAIL = "mailto:isidoramorenoesquivel@gmail.com";
 export const HREF_LINKEDIN = "https://www.linkedin.com/in/isidoramoreno/";
 export const HREF_BEHANCE = "https://www.behance.net/doradisenadora";

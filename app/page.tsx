@@ -33,10 +33,10 @@ const TAGS_ITERABLE = Object.values(TAGS);
 
 export default function RootPage() {
   return (
-    <main className={clsx("flex flex-col")}>
+    <main className={clsx("flex flex-col [&_section]:scroll-mt-[57px]")}>
       <section
         id="inicio"
-        className={clsx("md:grid md:grid-cols-5 md:overflow-hidden")}
+        className={clsx("md:grid md:grid-cols-5 md:overflow-hidden ")}
       >
         <div
           className={clsx(
