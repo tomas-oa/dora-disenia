@@ -1,7 +1,7 @@
 import "./globals.css";
+import { NODE_ENV } from "@/constants";
 import clsx from "clsx";
 
-import { Navbar } from "@/components/navbar";
 import type { Metadata } from "next";
 import { Host_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
@@ -50,7 +50,8 @@ export default function RootLayout({
     >
       <body
         className={clsx(
-          "debug-screens flex min-h-svh flex-col",
+          NODE_ENV === "development" && "debug-screens",
+          "flex min-h-svh flex-col",
           "selection:bg-fuchsia-300 selection:text-fuchsia-900",
           "[&_main]:md:mt-8 [&_section]:scroll-mt-[57px]",
         )}

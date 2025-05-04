@@ -152,7 +152,10 @@ export default async function Projects({ params }: Props) {
             <Image
               src={PROJECT["storage"]["cover"]}
               alt={PROJECT["title"]}
-              className={clsx("snap-start scroll-mt-[24.5px] aspect-[16/11]")}
+              className={clsx(
+                "hidden",
+                "lg:block lg:snap-start lg:scroll-mt-[24.5px] lg:aspect-[16/11] lg:object-center lg:object-cover",
+              )}
             />
 
             {PROJECT["storage"]["images"].map((image, index) => (
@@ -175,7 +178,10 @@ export default async function Projects({ params }: Props) {
                   <Image
                     src={image["src"]}
                     alt={image["alt"]}
-                    className={clsx(image["className"], "aspect-[16/11]")}
+                    className={clsx(
+                      image["className"],
+                      "aspect-[16/11] object-center object-cover",
+                    )}
                   />
                 )}
               </div>

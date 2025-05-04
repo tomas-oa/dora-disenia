@@ -23,19 +23,23 @@ import frankenstein_cover from "@/public/frankenstein/cover.png";
 
 import chao_reunionitis_cover from "@/public/chao-reunionitis/cover.png";
 
-export const ICON_ARROW_DOWN = "↓";
+export const NODE_ENV = /*#__PURE__*/ process.env.NODE_ENV || "development";
 
-export const HREF_MAIL = "mailto:isidoramorenoesquivel@gmail.com";
-export const HREF_LINKEDIN = "https://www.linkedin.com/in/isidoramoreno/";
-export const HREF_BEHANCE = "https://www.behance.net/doradisenadora";
-export const HREF_CV = "/cv.pdf";
-export const HREF_GITHUB = "https://github.com/tomas-oa";
+export const ICON_ARROW_DOWN = /*#__PURE__*/ "↓";
+
+export const HREF_MAIL = /*#__PURE__*/ "mailto:isidoramorenoesquivel@gmail.com";
+export const HREF_LINKEDIN =
+  /*#__PURE__*/ "https://www.linkedin.com/in/isidoramoreno/";
+export const HREF_BEHANCE =
+  /*#__PURE__*/ "https://www.behance.net/doradisenadora";
+export const HREF_CV = /*#__PURE__*/ "/cv.pdf";
+export const HREF_GITHUB = /*#__PURE__*/ "https://github.com/tomas-oa";
 
 export function NOW() {
   return new Date();
 }
 
-export const TAGS = {
+export const TAGS = /*#__PURE__*/ {
   design: {
     key: "design",
     label: "Diseño integral",
@@ -63,7 +67,7 @@ export const TAGS = {
   },
 } as const;
 
-export const PROJECTS = [
+export const PROJECTS = /*#__PURE__*/ [
   {
     title: "Una ventana para el arte",
     slug: "una-ventana-para-el-arte",
