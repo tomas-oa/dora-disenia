@@ -123,8 +123,8 @@ Ante el desafío de producir un material atractivo, adaptable y eficiente, se im
     color: "bg-dora-orange",
     content: {
       diggest:
-        "Rebranding estratégico para reposicionar una bebida artesanal en el mercado gastronómico contemporáneo.",
-      summary: `Loyca impulsó un rebranding estratégico con el objetivo de aumentar su alcance en el mercado, reposicionando su kombucha más allá del nicho orgánico convencional, para consolidarse como una alternativa versátil y gourmet en el mercado gastronómico; orientándose a restaurantes, coctelería de autor y cafés de especialidad. 
+        "Rebranding para reposicionar una bebida artesanal en el mercado gastronómico contemporáneo.",
+      summary: `Loyca impulsó un rebranding con el objetivo de aumentar su alcance en el mercado, reposicionando su kombucha más allá del nicho orgánico convencional, para consolidarse como una alternativa versátil y gourmet en el mercado gastronómico; orientándose a restaurantes, coctelería de autor y cafés de especialidad. 
 
 El nuevo enfoque de identidad mantiene la esencia artesanal de Loyca, combinándola con un carácter contemporáneo, fresco y experimental. Este replanteamiento fortaleció la identidad de la marca, facilitando también su integración en nuevos contextos de consumo, aumentando su percepción de calidad, autenticidad y adaptabilidad.`,
     },
@@ -156,6 +156,55 @@ El nuevo enfoque de identidad mantiene la esencia artesanal de Loyca, combinánd
         {
           src: kombucha_loyca_4,
           alt: "Kombucha Loyca",
+          className: "",
+        },
+      ],
+    },
+  },
+  {
+    title: "Frankenstein",
+    slug: "frankenstein",
+    color: "bg-dora-sky",
+    content: {
+      diggest:
+        "Afiche cultural desarrollado como proyecto universitario para conmemorar los 200 años de Frankenstein.",
+      summary: `Proyecto universitario de difusión cultural, desarrollado para conmemorar los más de 200 años de la publicación de Frankenstein (1818) y acercar su legado a nuevas generaciones.  El afiche se centra en reinterpretar una de las principales tensiones de la obra: la contraposición entre la bondad del monstruo y la maldad del ser humano.
+
+Bajo este concepto, la propuesta invita a una lectura contemporánea de la obra, abordando los dilemas éticos y existenciales que plantea. La propuesta utiliza recursos visuales metafóricos para enriquecer la interpretación y promover una conexión crítica y emocional con el espectador contemporáneo.`,
+    },
+    tags: [
+      {
+        key: TAGS["graphic"]["key"],
+        label: TAGS["graphic"]["label"],
+        className: TAGS["graphic"]["className"],
+      },
+    ],
+    storage: {
+      cover: frankenstein_cover,
+      images: [
+        {
+          src: frankenstein_1,
+          alt: "Frankenstein",
+          className: "",
+        },
+        {
+          src: frankenstein_2,
+          alt: "Frankenstein",
+          className: "",
+        },
+        {
+          src: frankenstein_3,
+          alt: "Frankenstein",
+          className: "",
+        },
+        {
+          src: frankenstein_4,
+          alt: "Frankenstein",
+          className: "",
+        },
+        {
+          src: frankenstein_5,
+          alt: "Frankenstein",
           className: "",
         },
       ],
@@ -225,55 +274,6 @@ La campaña tomó como eje conceptual la "reunionitis", un término humorístico
         {
           src: una_ventana_para_el_arte_8,
           alt: "Una ventana para el arte",
-          className: "",
-        },
-      ],
-    },
-  },
-  {
-    title: "Frankenstein",
-    slug: "frankenstein",
-    color: "bg-dora-sky",
-    content: {
-      diggest:
-        "Afiche cultural desarrollado como proyecto universitario para conmemorar los 200 años de Frankenstein.",
-      summary: `Proyecto universitario de difusión cultural, desarrollado para conmemorar los más de 200 años de la publicación de Frankenstein (1818) y acercar su legado a nuevas generaciones.  El afiche se centra en reinterpretar una de las principales tensiones de la obra: la contraposición entre la bondad del monstruo y la maldad del ser humano.
-
-Bajo este concepto, la propuesta invita a una lectura contemporánea de la obra, abordando los dilemas éticos y existenciales que plantea. La propuesta utiliza recursos visuales metafóricos para enriquecer la interpretación y promover una conexión crítica y emocional con el espectador contemporáneo.`,
-    },
-    tags: [
-      {
-        key: TAGS["graphic"]["key"],
-        label: TAGS["graphic"]["label"],
-        className: TAGS["graphic"]["className"],
-      },
-    ],
-    storage: {
-      cover: frankenstein_cover,
-      images: [
-        {
-          src: frankenstein_1,
-          alt: "Frankenstein",
-          className: "",
-        },
-        {
-          src: frankenstein_2,
-          alt: "Frankenstein",
-          className: "",
-        },
-        {
-          src: frankenstein_3,
-          alt: "Frankenstein",
-          className: "",
-        },
-        {
-          src: frankenstein_4,
-          alt: "Frankenstein",
-          className: "",
-        },
-        {
-          src: frankenstein_5,
-          alt: "Frankenstein",
           className: "",
         },
       ],
