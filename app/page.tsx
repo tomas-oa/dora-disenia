@@ -11,6 +11,10 @@ import {
   TAGS,
 } from "@/constants";
 
+import sticker from "@/public/sticker.svg";
+
+import lets_work_mobile from "@/public/lets-work/lets_work_mobile.png";
+
 import contact_background_desktop from "@/public/contact/background_desktop.svg";
 import contact_background_mobile from "@/public/contact/background_mobile.svg";
 import contact_gradient_desktop from "@/public/contact/gradient_desktop.png";
@@ -23,6 +27,59 @@ import footer_smiley from "@/public/footer/smiley.svg";
 export default function RootPage() {
   return (
     <main className={clsx("grid grid-cols-1")}>
+      <section
+        id="trabajemos"
+        className={clsx("relative flex h-150 flex-col", "lg:hidden")}
+      >
+        <Image
+          width={1280}
+          height={720}
+          src={lets_work_mobile}
+          alt="lets work"
+          draggable={false}
+          className={clsx(
+            "absolute inset-0 size-full object-cover object-center",
+          )}
+        />
+
+        <Image
+          src={sticker}
+          alt="sticker"
+          width={96}
+          height={96}
+          draggable={false}
+          className={clsx(
+            "-translate-x-1/2 absolute left-1/2 size-24 translate-y-54 animate-spin",
+          )}
+        />
+
+        <div
+          className={clsx(
+            "absolute inset-x-0 bottom-12 px-container",
+            "flex flex-row items-center justify-center gap-3",
+          )}
+        >
+          <Link
+            href="#contacto"
+            className={clsx(
+              "z-10 w-fit max-w-56 text-nowrap rounded-full bg-zinc-500 px-7 py-2.5 text-center text-base text-white",
+            )}
+          >
+            Contáctame {":)"}
+          </Link>
+
+          <a
+            download
+            href={"/cv.pdf"}
+            className={clsx(
+              "z-10 w-fit max-w-56 text-nowrap rounded-full bg-dora-blue px-7 py-2.5 text-center text-base text-white",
+            )}
+          >
+            Descarga mi CV
+          </a>
+        </div>
+      </section>
+
       <section
         id="contacto"
         className={clsx(
