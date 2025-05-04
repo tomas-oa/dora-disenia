@@ -74,9 +74,9 @@ Ante el desafío de producir un material atractivo, adaptable y eficiente, se im
     },
     tags: [
       {
-        key: TAGS?.["editorial"]?.["key"],
-        label: TAGS?.["editorial"]?.["label"],
-        className: TAGS?.["editorial"]?.["className"],
+        key: TAGS["editorial"]["key"],
+        label: TAGS["editorial"]["label"],
+        className: TAGS["editorial"]["className"],
       },
     ],
     storage: {
@@ -123,9 +123,9 @@ El nuevo enfoque de identidad mantiene la esencia artesanal de Loyca, combinánd
     },
     tags: [
       {
-        key: TAGS?.["branding"]?.["key"],
-        label: TAGS?.["branding"]?.["label"],
-        className: TAGS?.["branding"]?.["className"],
+        key: TAGS["branding"]["key"],
+        label: TAGS["branding"]["label"],
+        className: TAGS["branding"]["className"],
       },
     ],
     storage: {
@@ -172,14 +172,14 @@ La campaña tomó como eje conceptual la "reunionitis", un término humorístico
     },
     tags: [
       {
-        key: TAGS?.["graphic"]?.["key"],
-        label: TAGS?.["graphic"]?.["label"],
-        className: TAGS?.["graphic"]?.["className"],
+        key: TAGS["graphic"]["key"],
+        label: TAGS["graphic"]["label"],
+        className: TAGS["graphic"]["className"],
       },
       {
-        key: TAGS?.["illustration"]?.["key"],
-        label: TAGS?.["illustration"]?.["label"],
-        className: TAGS?.["illustration"]?.["className"],
+        key: TAGS["illustration"]["key"],
+        label: TAGS["illustration"]["label"],
+        className: TAGS["illustration"]["className"],
       },
     ],
     storage: {
@@ -241,9 +241,9 @@ Bajo este concepto, la propuesta invita a una lectura contemporánea de la obra,
     },
     tags: [
       {
-        key: TAGS?.["graphic"]?.["key"],
-        label: TAGS?.["graphic"]?.["label"],
-        className: TAGS?.["graphic"]?.["className"],
+        key: TAGS["graphic"]["key"],
+        label: TAGS["graphic"]["label"],
+        className: TAGS["graphic"]["className"],
       },
     ],
     storage: {
@@ -290,14 +290,14 @@ La propuesta busca generar una experiencia de lectura sensible y auténtica, com
     },
     tags: [
       {
-        key: TAGS?.["editorial"]?.["key"],
-        label: TAGS?.["editorial"]?.["label"],
-        className: TAGS?.["editorial"]?.["className"],
+        key: TAGS["editorial"]["key"],
+        label: TAGS["editorial"]["label"],
+        className: TAGS["editorial"]["className"],
       },
       {
-        key: TAGS?.["illustration"]?.["key"],
-        label: TAGS?.["illustration"]?.["label"],
-        className: TAGS?.["illustration"]?.["className"],
+        key: TAGS["illustration"]["key"],
+        label: TAGS["illustration"]["label"],
+        className: TAGS["illustration"]["className"],
       },
     ],
     storage: {
@@ -356,9 +356,9 @@ La propuesta busca generar una experiencia de lectura sensible y auténtica, com
     },
     tags: [
       {
-        key: TAGS?.["editorial"]?.["key"],
-        label: TAGS?.["editorial"]?.["label"],
-        className: TAGS?.["editorial"]?.["className"],
+        key: TAGS["editorial"]["key"],
+        label: TAGS["editorial"]["label"],
+        className: TAGS["editorial"]["className"],
       },
     ],
     storage: {
@@ -420,9 +420,9 @@ El proyecto funciona como un espacio de experimentación visual y narrativa, que
     },
     tags: [
       {
-        key: TAGS?.["illustration"]?.["key"],
-        label: TAGS?.["illustration"]?.["label"],
-        className: TAGS?.["illustration"]?.["className"],
+        key: TAGS["illustration"]["key"],
+        label: TAGS["illustration"]["label"],
+        className: TAGS["illustration"]["className"],
       },
     ],
     storage: {
