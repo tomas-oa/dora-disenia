@@ -21,6 +21,14 @@ import frankenstein_4 from "@/public/frankenstein/4.gif";
 import frankenstein_5 from "@/public/frankenstein/5.png";
 import frankenstein_cover from "@/public/frankenstein/cover.png";
 
+import chao_reunionitis_1 from "@/public/chao-reunionitis/1.png";
+import chao_reunionitis_2 from "@/public/chao-reunionitis/2.png";
+import chao_reunionitis_3 from "@/public/chao-reunionitis/3.png";
+import chao_reunionitis_4 from "@/public/chao-reunionitis/4.png";
+import chao_reunionitis_5 from "@/public/chao-reunionitis/5.png";
+import chao_reunionitis_6 from "@/public/chao-reunionitis/6.png";
+import chao_reunionitis_7 from "@/public/chao-reunionitis/7.png";
+import chao_reunionitis_8 from "@/public/chao-reunionitis/8.png";
 import chao_reunionitis_cover from "@/public/chao-reunionitis/cover.png";
 
 export const NODE_ENV = /*#__PURE__*/ process.env.NODE_ENV || "development";
@@ -237,43 +245,43 @@ La campaña tomó como eje conceptual la "reunionitis", un término humorístico
       cover: chao_reunionitis_cover,
       images: [
         {
-          src: una_ventana_para_el_arte_1,
-          alt: "Una ventana para el arte",
+          src: chao_reunionitis_1,
+          alt: "Chao Reunionitis",
           className: "",
         },
         {
-          src: una_ventana_para_el_arte_2,
-          alt: "Una ventana para el arte",
+          src: chao_reunionitis_2,
+          alt: "Chao Reunionitis",
           className: "",
         },
         {
-          src: una_ventana_para_el_arte_3,
-          alt: "Una ventana para el arte",
+          src: chao_reunionitis_3,
+          alt: "Chao Reunionitis",
           className: "",
         },
         {
-          src: una_ventana_para_el_arte_4,
-          alt: "Una ventana para el arte",
+          src: chao_reunionitis_4,
+          alt: "Chao Reunionitis",
           className: "",
         },
         {
-          src: una_ventana_para_el_arte_5,
-          alt: "Una ventana para el arte",
+          src: chao_reunionitis_5,
+          alt: "Chao Reunionitis",
           className: "",
         },
         {
-          src: una_ventana_para_el_arte_6,
-          alt: "Una ventana para el arte",
+          src: chao_reunionitis_6,
+          alt: "Chao Reunionitis",
           className: "",
         },
         {
-          src: una_ventana_para_el_arte_7,
-          alt: "Una ventana para el arte",
+          src: chao_reunionitis_7,
+          alt: "Chao Reunionitis",
           className: "",
         },
         {
-          src: una_ventana_para_el_arte_8,
-          alt: "Una ventana para el arte",
+          src: chao_reunionitis_8,
+          alt: "Chao Reunionitis",
           className: "",
         },
       ],
