@@ -78,6 +78,7 @@ export const TAGS = /*#__PURE__*/ {
 export const PROJECTS = /*#__PURE__*/ [
   {
     title: "Una ventana para el arte",
+    published: true,
     slug: "una-ventana-para-el-arte",
     color: "bg-dora-pink",
     content: {
@@ -127,6 +128,7 @@ Ante el desafío de producir un material atractivo, adaptable y eficiente, se im
   },
   {
     title: "Kombucha Loyca",
+    published: true,
     slug: "kombucha-loyca",
     color: "bg-dora-orange",
     content: {
@@ -171,6 +173,7 @@ El nuevo enfoque de identidad mantiene la esencia artesanal de Loyca, combinánd
   },
   {
     title: "Frankenstein",
+    published: true,
     slug: "frankenstein",
     color: "bg-dora-sky",
     content: {
@@ -220,6 +223,7 @@ Bajo este concepto, la propuesta invita a una lectura contemporánea de la obra,
   },
   {
     title: "Chao Reunionitis",
+    published: true,
     slug: "chao-reunionitis",
     color: "bg-dora-green",
     content: {
@@ -289,6 +293,7 @@ La campaña tomó como eje conceptual la "reunionitis", un término humorístico
   },
   {
     title: "A solas, el jardín",
+    published: true,
     slug: "a-solas-el-jardin",
     color: "bg-dora-violet",
     content: {
@@ -358,6 +363,7 @@ La propuesta busca generar una experiencia de lectura sensible y auténtica, com
   },
   {
     title: "¿?",
+    published: false,
     slug: "¿?",
     color: "bg-dora-pink",
     content: {
@@ -419,6 +425,7 @@ La propuesta busca generar una experiencia de lectura sensible y auténtica, com
   },
   {
     title: "Dora Ilustra",
+    published: false,
     slug: "dora-ilustra",
     color: "bg-dora-yellow",
     content: {
