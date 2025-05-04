@@ -351,7 +351,6 @@ export default function RootPage() {
               className={clsx(
                 "font-display font-medium text-2xl text-white",
                 "sm:text-4xl",
-                "lg:text-5xl",
               )}
             >
               Contáctame
@@ -379,7 +378,8 @@ export default function RootPage() {
                 draggable={false}
                 className={clsx(
                   "hidden",
-                  "lg:max-w-lg lg:border lg:border-black lg:block lg:size-full",
+                  "lg:max-w-md lg:border lg:border-black lg:block",
+                  "xl:max-w-lg",
                 )}
               />
 
@@ -467,7 +467,7 @@ export default function RootPage() {
                 rows={5}
                 placeholder="Mensaje"
                 className={clsx(
-                  "resize-none rounded-sm border border-zinc-400 bg-zinc-300 px-3 py-2 text-zinc-600",
+                  "size-full resize-none rounded-sm border border-zinc-400 bg-zinc-300 px-3 py-2 text-zinc-600",
                 )}
               />
 
