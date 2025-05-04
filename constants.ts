@@ -21,6 +21,8 @@ import frankenstein_4 from "@/public/frankenstein/4.gif";
 import frankenstein_5 from "@/public/frankenstein/5.png";
 import frankenstein_cover from "@/public/frankenstein/cover.png";
 
+import chao_reunionitis_cover from "@/public/chao-reunionitis/cover.png";
+
 export const ICON_ARROW_DOWN = "↓";
 
 export const HREF_MAIL = "mailto:isidoramorenoesquivel@gmail.com";
@@ -179,7 +181,7 @@ La campaña tomó como eje conceptual la "reunionitis", un término humorístico
       },
     ],
     storage: {
-      cover: una_ventana_para_el_arte_cover,
+      cover: chao_reunionitis_cover,
       images: [
         {
           src: una_ventana_para_el_arte_1,
