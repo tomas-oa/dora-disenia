@@ -2,36 +2,36 @@
 @plugin "tailwindcss-debug-screens";
 
 @theme {
-	--font-sans: "Host Grotesk", system-ui, sans-serif;
-	--font-display: "coolvetica", system-ui, sans-serif;
-	--font-mono: monospace;
+  --font-sans: "Host Grotesk", system-ui, sans-serif;
+  --font-display: "coolvetica", system-ui, sans-serif;
+  --font-mono: monospace;
 
-	--color-dora-white: #fffcf7;
-	--color-dora-sky: #0193ff;
-	--color-dora-pink: #ff77e6;
-	--color-dora-red: #fe2e00;
-	--color-dora-yellow: #fff90d;
-	--color-dora-orange: #ff5309;
-	--color-dora-green: #ccffcc;
-	--color-dora-violet: #ffbaa9;
-	--color-dora-blue: #0768ff;
+  --color-dora-white: #fffcf7;
+  --color-dora-sky: #0193ff;
+  --color-dora-pink: #ff77e6;
+  --color-dora-red: #fe2e00;
+  --color-dora-yellow: #fff90d;
+  --color-dora-orange: #ff5309;
+  --color-dora-green: #ccffcc;
+  --color-dora-violet: #ffbaa9;
+  --color-dora-blue: #0768ff;
 
-	--animate-spin: spin 15s linear infinite;
-	--animate-bounce: bounce 2s linear infinite;
+  --animate-spin: spin 15s linear infinite;
+  --animate-bounce: bounce 2s linear infinite;
 
-	--scrollbar-hide: scrollbar-hide;
+  --scrollbar-hide: scrollbar-hide;
 }
 
 @utility scrollbar-hidden {
-	&::-webkit-scrollbar {
-		@apply hidden;
-	}
+  &::-webkit-scrollbar {
+    @apply hidden;
+  }
 }
 
 @utility p-container {
-	@apply p-8 md:p-14 lg:p-20;
+  @apply p-8 md:p-14 lg:p-20;
 }
 
 @utility px-container {
-	@apply px-8 md:px-14 lg:px-20;
+  @apply px-8 md:px-14 lg:px-20;
 }
