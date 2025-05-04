@@ -12,7 +12,6 @@ import kombucha_loyca_1 from "@/public/kombucha-loyca/1.png";
 import kombucha_loyca_2 from "@/public/kombucha-loyca/2.png";
 import kombucha_loyca_3 from "@/public/kombucha-loyca/3.png";
 import kombucha_loyca_4 from "@/public/kombucha-loyca/4.png";
-import kombucha_loyca_5 from "@/public/kombucha-loyca/5.png";
 import kombucha_loyca_cover from "@/public/kombucha-loyca/cover.png";
 
 import frankenstein_1 from "@/public/frankenstein/1.png";
@@ -97,7 +96,7 @@ Ante el desafío de producir un material atractivo, adaptable y eficiente, se im
         {
           src: una_ventana_para_el_arte_3,
           alt: "Una ventana para el arte",
-          className: "xl:scale-108",
+          className: "scale-120",
         },
         {
           src: una_ventana_para_el_arte_4,
@@ -150,11 +149,6 @@ El nuevo enfoque de identidad mantiene la esencia artesanal de Loyca, combinánd
         },
         {
           src: kombucha_loyca_4,
-          alt: "Kombucha Loyca",
-          className: "",
-        },
-        {
-          src: kombucha_loyca_5,
           alt: "Kombucha Loyca",
           className: "",
         },

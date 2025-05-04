@@ -13,9 +13,10 @@ export function Navbar({
   return (
     <nav
       className={clsx(
-        "fixed top-0 left-0 right-0 z-50",
-        "bg-black flex flex-row justify-between w-full",
-        "py-4 px-navbar",
+        "hidden",
+        "md:fixed md:top-0 md:inset-x-0 md:z-50",
+        "md:bg-black md:flex md:flex-row md:justify-between md:w-full",
+        "md:py-4 md:px-navbar",
         className,
       )}
       {...props}

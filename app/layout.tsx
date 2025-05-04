@@ -52,9 +52,9 @@ export default function RootLayout({
         className={clsx(
           "debug-screens flex min-h-svh flex-col",
           "selection:bg-fuchsia-300 selection:text-fuchsia-900",
+          "[&_main]:md:mt-8 [&_section]:scroll-mt-[57px]",
         )}
       >
-        <Navbar />
         {children}
       </body>
     </html>
