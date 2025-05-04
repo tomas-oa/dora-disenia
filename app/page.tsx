@@ -129,16 +129,17 @@ export default function RootPage() {
           <div className={clsx("hidden", "md:relative md:block md:col-span-2")}>
             <div className="relative size-full">
               <Image
+                placeholder="blur"
                 src={lets_work_mobile}
                 alt="lets work"
                 draggable={false}
                 className="size-full object-cover object-center"
-                priority
               />
 
               <Image
                 src={sticker}
                 alt="sticker"
+                draggable={false}
                 className={clsx(
                   "absolute",
                   "size-26",
@@ -247,6 +248,7 @@ export default function RootPage() {
                 </p>
 
                 <Image
+                  draggable={false}
                   src={arrow}
                   alt="arrow"
                   className={clsx("size-10 aspect-square rotate-180")}
@@ -257,6 +259,8 @@ export default function RootPage() {
                 className={clsx("lg:hidden")}
                 src={project["storage"]["cover"]}
                 alt={project["title"]}
+                placeholder="blur"
+                draggable={false}
               />
             </Link>
           ))}
@@ -271,6 +275,7 @@ export default function RootPage() {
             height={720}
             src={lets_work_mobile}
             alt="lets work"
+            placeholder="blur"
             draggable={false}
             className={clsx(
               "absolute inset-0 size-full object-cover object-center",
@@ -375,12 +380,14 @@ export default function RootPage() {
                   className={clsx("size-full border border-black", "lg:hidden")}
                   src={contact_gradient_mobile}
                   alt="gradient"
+                  placeholder="blur"
                   draggable={false}
                 />
 
                 <Image
                   src={contact_gradient_desktop}
                   alt="gradient"
+                  placeholder="blur"
                   draggable={false}
                   className={clsx(
                     "hidden",
@@ -504,12 +511,12 @@ export default function RootPage() {
           >
             <Image
               src={footer_smiley}
+              alt="smiley"
+              draggable={false}
               className={clsx(
                 "size-32 object-contain object-center",
                 "md:size-24",
               )}
-              alt="smiley"
-              draggable={false}
             />
 
             <p

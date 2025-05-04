@@ -98,6 +98,7 @@ export default async function Projects({ params }: Props) {
               src={PROJECT["storage"]["cover"]}
               alt={PROJECT["title"]}
               placeholder="blur"
+              draggable={false}
               className={clsx("border border-black", "lg:hidden")}
             />
 
@@ -154,6 +155,7 @@ export default async function Projects({ params }: Props) {
               src={PROJECT["storage"]["cover"]}
               alt={PROJECT["title"]}
               placeholder="blur"
+              draggable={false}
               className={clsx(
                 "hidden",
                 "lg:block lg:snap-start lg:scroll-mt-[24.5px] lg:aspect-[16/11] lg:object-center lg:object-cover",
@@ -181,6 +183,7 @@ export default async function Projects({ params }: Props) {
                     src={image["src"]}
                     alt={image["alt"]}
                     placeholder="blur"
+                    draggable={false}
                     className={clsx(
                       image["className"],
                       "aspect-[16/11] object-center object-cover",
