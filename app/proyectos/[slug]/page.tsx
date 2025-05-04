@@ -162,11 +162,22 @@ export default async function Projects({ params }: Props) {
                   "overflow-hidden snap-start scroll-mt-[24.5px]",
                 )}
               >
-                <Image
-                  src={image["src"]}
-                  alt={image["alt"]}
-                  className={clsx(image["className"], "aspect-[16/11]")}
-                />
+                {typeof image["src"] === "string" &&
+                image["src"].toString().endsWith(".mp4") ? (
+                  <video
+                    src={image["src"]}
+                    autoPlay
+                    muted
+                    loop
+                    className={clsx(image["className"], "bg-black size-full")}
+                  />
+                ) : (
+                  <Image
+                    src={image["src"]}
+                    alt={image["alt"]}
+                    className={clsx(image["className"], "aspect-[16/11]")}
+                  />
+                )}
               </div>
             ))}
           </section>
