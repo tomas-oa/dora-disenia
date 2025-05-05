@@ -271,7 +271,7 @@ La campaña tomó como eje conceptual la "reunionitis", un término humorístico
         {
           src: chao_reunionitis_5,
           alt: "Chao Reunionitis",
-          className: "object-bottom",
+          className: "object-center",
         },
         {
           src: chao_reunionitis_6,
