@@ -182,11 +182,15 @@ export default async function Projects({ params }: Props) {
                   <Image
                     src={image["src"]}
                     alt={image["alt"]}
-                    placeholder="blur"
+                    placeholder={
+                      image["src"].toString().endsWith(".png")
+                        ? "blur"
+                        : "empty"
+                    }
                     draggable={false}
                     className={clsx(
+                      "aspect-[16/11] object-cover",
                       image["className"],
-                      "aspect-[16/11] object-center object-cover",
                     )}
                   />
                 )}
