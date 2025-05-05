@@ -251,49 +251,49 @@ La campaña tomó como eje conceptual la "reunionitis", un término humorístico
         {
           src: chao_reunionitis_1,
           alt: "Chao Reunionitis",
-          className: "",
+          className: "object-bottom",
         },
         {
           src: chao_reunionitis_2,
           alt: "Chao Reunionitis",
-          className: "",
+          className: "object-top",
         },
         {
           src: chao_reunionitis_3,
           alt: "Chao Reunionitis",
-          className: "",
+          className: "object-bottom",
         },
         {
           src: chao_reunionitis_4,
           alt: "Chao Reunionitis",
-          className: "",
+          className: "object-top",
         },
         {
           src: chao_reunionitis_5,
           alt: "Chao Reunionitis",
-          className: "",
+          className: "object-bottom",
         },
         {
           src: chao_reunionitis_6,
           alt: "Chao Reunionitis",
-          className: "",
+          className: "object-top",
         },
         {
           src: chao_reunionitis_7,
           alt: "Chao Reunionitis",
-          className: "",
+          className: "object-bottom",
         },
         {
           src: chao_reunionitis_8,
           alt: "Chao Reunionitis",
-          className: "",
+          className: "object-top",
         },
       ],
     },
   },
   {
     title: "A solas, el jardín",
-    published: true,
+    published: false,
     slug: "a-solas-el-jardin",
     color: "bg-dora-violet",
     content: {
