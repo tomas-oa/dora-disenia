@@ -1,3 +1,4 @@
+import { PosthogContextProvider } from "@/hooks/use-posthog";
 import "./globals.css";
 import { NODE_ENV } from "@/constants";
 import clsx from "clsx";
@@ -33,6 +34,9 @@ export const metadata: Metadata = {
   description: "Dora Diseña",
 };
 
+const POSTHOG_DISABLED = NODE_ENV === "development";
+const DEBUG_SCREEN_ENABLED = NODE_ENV === "development";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -50,13 +54,15 @@ export default function RootLayout({
     >
       <body
         className={clsx(
-          NODE_ENV === "development" && "debug-screens",
+          DEBUG_SCREEN_ENABLED && "debug-screens",
           "flex min-h-svh flex-col",
           "selection:bg-fuchsia-300 selection:text-fuchsia-900",
           "[&_main]:md:mt-8 [&_section]:scroll-mt-[57px]",
         )}
       >
-        {children}
+        <PosthogContextProvider disabled={POSTHOG_DISABLED}>
+          {children}
+        </PosthogContextProvider>
       </body>
     </html>
   );

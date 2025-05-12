@@ -35,19 +35,11 @@ export const NODE_ENV = /*#__PURE__*/ process.env.NODE_ENV || "development";
 
 export const ICON_ARROW_DOWN = /*#__PURE__*/ "↓";
 
-export const HREF_MAIL = /*#__PURE__*/ "mailto:isidoramorenoesquivel@gmail.com";
-export const HREF_LINKEDIN =
-  /*#__PURE__*/ "https://www.linkedin.com/in/isidoramoreno/";
-export const HREF_BEHANCE =
-  /*#__PURE__*/ "https://www.behance.net/doradisenadora";
-export const HREF_CV = /*#__PURE__*/ "/cv.pdf";
-export const HREF_GITHUB = /*#__PURE__*/ "https://github.com/tomas-oa";
-
 export function NOW() {
   return new Date();
 }
 
-export const TAGS = /*#__PURE__*/ {
+const TAGS = /*#__PURE__*/ {
   design: {
     key: "design",
     label: "Diseño integral",
@@ -74,6 +66,8 @@ export const TAGS = /*#__PURE__*/ {
     className: "bg-dora-yellow text-black",
   },
 } as const;
+
+export const TAGS_ITERABLE = /*#__PURE__*/ Object.values(TAGS);
 
 export const PROJECTS = /*#__PURE__*/ [
   {
@@ -120,6 +114,21 @@ Ante el desafío de producir un material atractivo, adaptable y eficiente, se im
         },
         {
           src: una_ventana_para_el_arte_5,
+          alt: "Una ventana para el arte",
+          className: "",
+        },
+        {
+          src: una_ventana_para_el_arte_6,
+          alt: "Una ventana para el arte",
+          className: "",
+        },
+        {
+          src: una_ventana_para_el_arte_7,
+          alt: "Una ventana para el arte",
+          className: "",
+        },
+        {
+          src: una_ventana_para_el_arte_8,
           alt: "Una ventana para el arte",
           className: "",
         },
@@ -489,3 +498,7 @@ El proyecto funciona como un espacio de experimentación visual y narrativa, que
     },
   },
 ] as const;
+
+export const PUBLISHED_PROJECTS = /*#__PURE__*/ PROJECTS.filter(
+  (project) => project["published"],
+);

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components/ui/navbar";
 import { PROJECTS } from "@/constants";
 import clsx from "clsx";
 

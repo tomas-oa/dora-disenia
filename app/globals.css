@@ -39,3 +39,33 @@
 @utility px-navbar {
   @apply px-4 md:px-8 lg:px-12;
 }
+
+@utility input {
+  @apply block;
+  @apply border-0;
+  @apply bg-dora-white;
+  @apply transition motion-reduce:transition-none;
+  @apply text-zinc-700 placeholder:text-zinc-600;
+  @apply shadow-sm;
+  @apply rounded-sm px-3 py-2 text-sm leading-6;
+  @apply ring-1 ring-inset ring-zinc-300;
+  @apply hover:ring-1 hover:ring-inset hover:ring-zinc-400;
+  @apply focus:ring-1 focus:ring-inset focus:ring-zinc-500;
+  @apply disabled:bg-zinc-200 disabled:ring-zinc-300 disabled:text-zinc-400 disabled:opacity-100;
+}
+
+@utility button {
+  @apply relative;
+  @apply inline-flex flex-row items-center justify-center;
+  @apply transition-colors duration-300 ease-in-out motion-reduce:transition-none;
+  @apply cursor-pointer;
+  @apply disabled:opacity-20 disabled:cursor-default disabled:pointer-events-none;
+  @apply aria-disabled:opacity-20 aria-disabled:cursor-default aria-disabled:pointer-events-none;
+  @apply aria-busy:cursor-wait;
+  @apply shadow-sm;
+  @apply rounded-full px-4.5 py-2.5 text-base font-medium;
+  @apply text-dora-white;
+  @apply bg-dora-blue;
+  @apply hover:bg-dora-blue/80;
+  @apply focus:ring-2 focus:ring-dora-blue/40;
+}
