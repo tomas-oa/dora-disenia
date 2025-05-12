@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import clsx from "clsx";
 import type { Metadata } from "next";
 import { Host_Grotesk } from "next/font/google";
@@ -91,6 +92,7 @@ export default function RootLayout({
       >
         <PosthogContextProvider disabled={POSTHOG_DISABLED}>
           {children}
+          <Analytics />
         </PosthogContextProvider>
       </body>
     </html>
