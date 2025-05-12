@@ -36,7 +36,31 @@ export const metadata: Metadata = {
     template: "%s • DORA DISEÑA",
   },
   description:
-    "Portafolio de Isidora Moreno, diseñadora con experiencia en diseño gráfico, editorial, branding e ilustración. Creativa y versátil desde Chile.",
+    "Diseñadora con experiencia en diseño gráfico, editorial, branding e ilustración, egresada de la UC. Especialista en soluciones visuales efectivas.",
+  openGraph: {
+    title: "DORA DISEÑA",
+    description:
+      "Diseñadora con experiencia en diseño gráfico, editorial, branding e ilustración, egresada de la UC. Especialista en soluciones visuales efectivas.",
+    url: BASE_URL,
+    siteName: "DORA DISEÑA",
+    images: [
+      {
+        url: `${BASE_URL}/opengraph-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "DORA DISEÑA",
+      },
+    ],
+    locale: "es",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DORA DISEÑA",
+    description:
+      "Diseñadora con experiencia en diseño gráfico, editorial, branding e ilustración, egresada de la UC. Especialista en soluciones visuales efectivas.",
+    images: [`${BASE_URL}/opengraph-image.png`],
+  },
 };
 
 const POSTHOG_DISABLED = NODE_ENV === "development";
