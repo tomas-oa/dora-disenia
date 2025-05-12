@@ -1,11 +1,11 @@
-import { PosthogContextProvider } from "@/hooks/use-posthog";
 import "./globals.css";
-import { NODE_ENV } from "@/constants";
 import clsx from "clsx";
-
 import type { Metadata } from "next";
 import { Host_Grotesk } from "next/font/google";
 import localFont from "next/font/local";
+
+import { BASE_URL, NODE_ENV } from "@/constants";
+import { PosthogContextProvider } from "@/hooks/use-posthog";
 
 const hostGrotesk = Host_Grotesk({
   variable: "--font-host-grotesk",
@@ -30,8 +30,13 @@ const coolvetica = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Dora Diseña",
-  description: "Dora Diseña",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "DORA DISEÑA",
+    template: "%s • DORA DISEÑA",
+  },
+  description:
+    "Portafolio de Isidora Moreno, diseñadora con experiencia en diseño gráfico, editorial, branding e ilustración. Creativa y versátil desde Chile.",
 };
 
 const POSTHOG_DISABLED = NODE_ENV === "development";

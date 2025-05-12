@@ -11,6 +11,31 @@ interface Props {
   }>;
 }
 
+export const generateMetadata = async ({ params }: Props) => {
+  const { slug } = await params;
+  const PROJECT = PROJECTS.find((project) => project.slug === slug);
+
+  if (!PROJECT) {
+    notFound();
+  }
+
+  return {
+    title: PROJECT["title"],
+    description: PROJECT["content"]["diggest"],
+    openGraph: {
+      title: PROJECT["title"],
+      description: PROJECT["content"]["diggest"],
+      images: [
+        {
+          url: PROJECT["storage"]["cover"],
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
+};
+
 export default async function Projects({ params }: Props) {
   const { slug } = await params;
   const PROJECT = PROJECTS.find((project) => project.slug === slug);

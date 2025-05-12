@@ -502,3 +502,5 @@ El proyecto funciona como un espacio de experimentación visual y narrativa, que
 export const PUBLISHED_PROJECTS = /*#__PURE__*/ PROJECTS.filter(
   (project) => project["published"],
 );
+
+export const BASE_URL = /*#__PURE__*/ "https://doradiseña.com";
