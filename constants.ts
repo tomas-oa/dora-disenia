@@ -503,4 +503,4 @@ export const PUBLISHED_PROJECTS = /*#__PURE__*/ PROJECTS.filter(
   (project) => project["published"],
 );
 
-export const BASE_URL = /*#__PURE__*/ "https://doradiseña.com";
+export const BASE_URL = /*#__PURE__*/ "https://doradiseña.art";
