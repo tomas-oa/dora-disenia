@@ -2,7 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { Navbar } from "@/components/ui/navbar";
-import { PROJECTS } from "@/constants";
+import { BASE_URL, PROJECTS } from "@/constants";
 import clsx from "clsx";
 
 interface Props {
@@ -27,7 +27,7 @@ export const generateMetadata = async ({ params }: Props) => {
       description: PROJECT["content"]["diggest"],
       images: [
         {
-          url: PROJECT["storage"]["cover"],
+          url: `${BASE_URL}/${PROJECT["slug"]}/cover.png`,
           width: 1200,
           height: 630,
         },
