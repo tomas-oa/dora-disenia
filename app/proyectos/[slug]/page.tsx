@@ -23,15 +23,23 @@ export const generateMetadata = async ({ params }: Props) => {
     title: PROJECT["title"],
     description: PROJECT["content"]["diggest"],
     openGraph: {
-      title: PROJECT["title"],
+      title: `${PROJECT["title"]} • DORA DISEÑA`,
       description: PROJECT["content"]["diggest"],
+      url: `${BASE_URL}/${PROJECT["slug"]}`,
       images: [
         {
+          alt: PROJECT["title"],
           url: `${BASE_URL}/${PROJECT["slug"]}/cover.png`,
           width: 1200,
           height: 630,
         },
       ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${PROJECT["title"]} • DORA DISEÑA`,
+      description: PROJECT["content"]["diggest"],
+      images: [`${BASE_URL}/${PROJECT["slug"]}/cover.png`],
     },
   };
 };
