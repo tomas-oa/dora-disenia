@@ -2,68 +2,18 @@
 
 import clsx from "clsx";
 import Image from "next/image";
-import type { StaticImageData } from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
 
 import arrow from "@/public/arrow.svg";
 
 import { PUBLISHED_PROJECTS } from "@/constants";
 
 export function SectionProjects() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [hoveredProject, setHoveredProject] = useState<{
-    slug: string;
-    cover: StaticImageData;
-    title: string;
-  } | null>(null);
-
-  // Preload all project images
-  useEffect(() => {
-    for (const project of PUBLISHED_PROJECTS) {
-      const img = new window.Image();
-      img.src = project.storage.cover.src;
-    }
-  }, []);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    requestAnimationFrame(() => {
-      setMousePosition({ x: e["clientX"], y: e["clientY"] });
-    });
-  }, []);
-
   return (
     <section
       id="proyectos"
       className={clsx("flex flex-col divide-y divide-black border-y")}
-      onMouseMove={handleMouseMove}
     >
-      {hoveredProject && (
-        <div
-          className={clsx(
-            "max-lg:hidden",
-            "pointer-events-none border-none divide-none",
-            "fixed z-50 transition-all duration-300 ease-out overflow-visible",
-          )}
-          style={{
-            left: mousePosition["x"] + 10,
-            top: mousePosition["y"] + 10,
-          }}
-        >
-          <Image
-            src={hoveredProject["cover"]}
-            alt={`Foto de ${hoveredProject["title"]}`}
-            draggable={false}
-            className={clsx(
-              "rounded-lg shadow-2xl",
-              "transition-transform duration-300 ease-out transform",
-              "lg:w-96 lg:h-auto",
-            )}
-            priority
-          />
-        </div>
-      )}
-
       {PUBLISHED_PROJECTS.map((project) => (
         <Link
           href={`/proyectos/${project["slug"]}`}
@@ -72,14 +22,6 @@ export function SectionProjects() {
             "flex flex-col divide-y divide-black",
             "lg:divide-none lg:flex-row lg:justify-between",
           )}
-          onMouseEnter={() =>
-            setHoveredProject({
-              slug: project["slug"],
-              cover: project["storage"]["cover"],
-              title: project["title"],
-            })
-          }
-          onMouseLeave={() => setHoveredProject(null)}
         >
           <div
             className={clsx(
