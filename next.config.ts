@@ -2,7 +2,7 @@ import assert from "node:assert";
 import type { NextConfig } from "next";
 
 assert(process.env.RESEND_API_KEY, "RESEND_API_KEY is not set");
-assert(process.env.PROD_EMAIL_TO, "PROD_EMAIL_TO is not set");
+assert(process.env.PRODUCTION_EMAIL_TO, "PRODUCTION_EMAIL_TO is not set");
 assert(process.env.DEVELOPMENT_EMAIL_TO, "DEVELOPMENT_EMAIL_TO is not set");
 assert(
   process.env.NEXT_PUBLIC_POSTHOG_KEY,
@@ -16,7 +16,7 @@ assert(
 const nextConfig: NextConfig = {
   env: {
     RESEND_API_KEY: process.env.RESEND_API_KEY,
-    PROD_EMAIL_TO: process.env.PROD_EMAIL_TO,
+    PRODUCTION_EMAIL_TO: process.env.PRODUCTION_EMAIL_TO,
     DEVELOPMENT_EMAIL_TO: process.env.DEVELOPMENT_EMAIL_TO,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
