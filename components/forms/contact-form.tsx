@@ -52,7 +52,6 @@ export function ContactForm({
       <FormProvider {...form}>
         <ContactFieldset
           readOnly={isSubmitting}
-          disabled={isSubmitting}
           className={clsx("grid grid-cols-1 gap-2")}
         />
 

@@ -1,5 +1,5 @@
 import { ICON_ARROW_DOWN } from "@/constants";
-import dora_logo from "@/public/navbar/logo_dora.svg";
+import dora_logo from "@/public/ui/navbar/logo_dora.svg";
 
 import { clsx } from "clsx";
 import Image from "next/image";

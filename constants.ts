@@ -31,6 +31,10 @@ import chao_reunionitis_7 from "@/public/chao-reunionitis/7.png";
 import chao_reunionitis_8 from "@/public/chao-reunionitis/8.png";
 import chao_reunionitis_cover from "@/public/chao-reunionitis/cover.png";
 
+import hicigrafia_1 from "@/public/hicigrafia/1.png";
+import hicigrafia_2 from "@/public/hicigrafia/2.png";
+import hicigrafia_cover from "@/public/hicigrafia/cover.png";
+
 export const NODE_ENV = /*#__PURE__*/ process.env.NODE_ENV || "development";
 
 export const ICON_ARROW_DOWN = /*#__PURE__*/ "↓";
@@ -189,7 +193,6 @@ El nuevo enfoque de identidad mantiene la esencia artesanal de Loyca, combinánd
       diggest:
         "Afiche cultural desarrollado como proyecto universitario para conmemorar los 200 años de Frankenstein.",
       summary: `Proyecto universitario de difusión cultural, desarrollado para conmemorar los más de 200 años de la publicación de Frankenstein (1818) y acercar su legado a nuevas generaciones.  El afiche se centra en reinterpretar una de las principales tensiones de la obra: la contraposición entre la bondad del monstruo y la maldad del ser humano.
-
 Bajo este concepto, la propuesta invita a una lectura contemporánea de la obra, abordando los dilemas éticos y existenciales que plantea. La propuesta utiliza recursos visuales metafóricos para enriquecer la interpretación y promover una conexión crítica y emocional con el espectador contemporáneo.`,
     },
     tags: [
@@ -433,16 +436,15 @@ La propuesta busca generar una experiencia de lectura sensible y auténtica, com
     },
   },
   {
-    title: "Dora Ilustra",
-    published: false,
-    slug: "dora-ilustra",
+    title: "Hicigrafía",
+    published: true,
+    slug: "hicigrafia",
     color: "bg-dora-yellow",
     content: {
       diggest:
-        "Proyecto personal de ilustración centrado en la creación de personajes, exploración emocional y el desarrollo de un lenguaje visual propio.",
-      summary: `Dora Ilustra es un proyecto personal de ilustración enfocado en la creación de personajes y el desarrollo de un lenguaje visual propio. Basado en la expresión emocional como eje conceptual, explora formas de representación que, a través de una gráfica sólida y distintiva, buscan generar conexión e interpretación en distintas audiencias.
-
-El proyecto funciona como un espacio de experimentación visual y narrativa, que impulsa el crecimiento creativo y la consolidación de una identidad artística en constante evolución.`,
+        "Proyecto personal de ilustración que experimenta con personajes y emociones para dar forma a un lenguaje visual propio.",
+      summary:
+        "Hicigrafía es un proyecto personal de ilustración que nace de mi interés por crear un lenguaje visual propio, explorando formas de representación emocional que inviten a la conexión y a distintas interpretaciones. Es también un espacio de experimentación y aprendizaje, que me permite ir dibujando un camino artístico en constante cambio.",
     },
     tags: [
       {
@@ -452,48 +454,18 @@ El proyecto funciona como un espacio de experimentación visual y narrativa, que
       },
     ],
     storage: {
-      cover: una_ventana_para_el_arte_cover,
+      cover: hicigrafia_cover,
       images: [
         {
-          src: una_ventana_para_el_arte_1,
+          src: hicigrafia_1,
           alt: "Una ventana para el arte",
           className: "",
         },
         {
-          src: una_ventana_para_el_arte_2,
+          src: hicigrafia_2,
           alt: "Una ventana para el arte",
           className: "",
-        },
-        {
-          src: una_ventana_para_el_arte_3,
-          alt: "Una ventana para el arte",
-          className: "",
-        },
-        {
-          src: una_ventana_para_el_arte_4,
-          alt: "Una ventana para el arte",
-          className: "",
-        },
-        {
-          src: una_ventana_para_el_arte_5,
-          alt: "Una ventana para el arte",
-          className: "",
-        },
-        {
-          src: una_ventana_para_el_arte_6,
-          alt: "Una ventana para el arte",
-          className: "",
-        },
-        {
-          src: una_ventana_para_el_arte_7,
-          alt: "Una ventana para el arte",
-          className: "",
-        },
-        {
-          src: una_ventana_para_el_arte_8,
-          alt: "Una ventana para el arte",
-          className: "",
-        },
+        }
       ],
     },
   },
