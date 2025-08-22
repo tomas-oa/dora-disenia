@@ -33,6 +33,9 @@ import chao_reunionitis_cover from "@/public/chao-reunionitis/cover.png";
 
 import hicigrafia_1 from "@/public/hicigrafia/1.png";
 import hicigrafia_2 from "@/public/hicigrafia/2.png";
+import hicigrafia_3 from "@/public/hicigrafia/3.png";
+import hicigrafia_4 from "@/public/hicigrafia/4.png";
+import hicigrafia_5 from "@/public/hicigrafia/5.png";
 import hicigrafia_cover from "@/public/hicigrafia/cover.png";
 
 export const NODE_ENV = /*#__PURE__*/ process.env.NODE_ENV || "development";
@@ -465,7 +468,22 @@ La propuesta busca generar una experiencia de lectura sensible y auténtica, com
           src: hicigrafia_2,
           alt: "Una ventana para el arte",
           className: "",
-        }
+        },
+        {
+          src: hicigrafia_3,
+          alt: "Una ventana para el arte",
+          className: "",
+        },
+        {
+          src: hicigrafia_4,
+          alt: "Una ventana para el arte",
+          className: "",
+        },
+        {
+          src: hicigrafia_5,
+          alt: "Una ventana para el arte",
+          className: "",
+        },
       ],
     },
   },
