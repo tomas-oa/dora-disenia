@@ -447,9 +447,9 @@ La propuesta busca generar una experiencia de lectura sensible y auténtica, com
     color: "bg-dora-yellow",
     content: {
       diggest:
-        "Proyecto personal de ilustración que experimenta con personajes y emociones para dar forma a un lenguaje visual propio.",
+        "Proyecto de ilustración centrado en la creación de un estilo gráfico propio.",
       summary:
-        "Hicigrafía es un proyecto personal de ilustración que nace de mi interés por crear un lenguaje visual propio, explorando formas de representación emocional que inviten a la conexión y a distintas interpretaciones. Es también un espacio de experimentación y aprendizaje, que me permite ir dibujando un camino artístico en constante cambio.",
+        "Hicigrafía es un proyecto de ilustración nombrado a partir del seudónimo hicidora y nace de la búsqueda por desarrollar un estilo gráfico personal. Inspirado en ocurrencias propias y en la forma de ver lo cotidiano, propone un estilo cercano y expresivo que invita a imaginar un mundo más amable y alegre. El proyecto busca crear piezas gráficas que transmitan ternura y dejen espacio para que cada persona conecte con sus emociones y les dé su propia interpretación.",
     },
     tags: [
       {
@@ -474,22 +474,22 @@ La propuesta busca generar una experiencia de lectura sensible y auténtica, com
         {
           src: hicigrafia_3,
           alt: "Una ventana para el arte",
-          className: "",
+          className: "scale-140",
         },
         {
           src: hicigrafia_4,
           alt: "Una ventana para el arte",
-          className: "",
+          className: "scale-140",
         },
         {
           src: hicigrafia_5,
           alt: "Una ventana para el arte",
-          className: "",
+          className: "scale-140",
         },
         {
           src: hicigrafia_6,
           alt: "Una ventana para el arte",
-          className: "",
+          className: "scale-140",
         },
         {
           src: hicigrafia_7,

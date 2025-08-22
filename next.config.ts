@@ -14,6 +14,9 @@ assert(
 );
 
 const nextConfig: NextConfig = {
+  images: {
+    qualities: [75, 100],
+  },
   env: {
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     PRODUCTION_EMAIL_TO: process.env.PRODUCTION_EMAIL_TO,

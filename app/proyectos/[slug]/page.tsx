@@ -215,6 +215,7 @@ export default async function Projects({ params }: Props) {
                   <Image
                     src={image["src"]}
                     alt={image["alt"]}
+                    quality={100}
                     placeholder={
                       image["src"].toString().endsWith(".png")
                         ? "blur"
