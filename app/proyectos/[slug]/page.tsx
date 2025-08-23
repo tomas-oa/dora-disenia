@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Navbar } from "@/components/ui/navbar";
 import { BASE_URL, PROJECTS } from "@/constants";
 import clsx from "clsx";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 interface Props {
   params: Promise<{
@@ -64,6 +65,20 @@ export default async function Projects({ params }: Props) {
           "xl:p-container xl:gap-8",
         )}
       >
+        <Breadcrumb
+          className={clsx("md:hidden")}
+          breadcrumbs={[
+            {
+              title: "Proyectos",
+              href: "/#proyectos",
+            },
+            {
+              title: PROJECT["title"],
+              href: `/proyectos/${PROJECT["slug"]}`,
+            },
+          ]}
+        />
+
         <section
           className={clsx(
             "flex flex-col gap-8",
