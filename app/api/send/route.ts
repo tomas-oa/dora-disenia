@@ -11,7 +11,7 @@ export async function POST(req: Request) {
       from: "Dorila Morila <dora@doradisena.art>",
       to: "isidoramorenoesquivel@gmail.com",
       subject: "Nuevo mensaje de contacto",
-      text: "alo amor estoy probando esto si te llegó este correo es porque están funcionando los mails desde tu web",
+      text: `Nuevo mensaje de ${name} (${email}):\n\n${message}`,
     });
 
     if (error) {
