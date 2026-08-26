@@ -32,5 +32,6 @@
     "oxlint": "^1.80.0",
     "typescript": "^7.0.2",
     "wrangler": "^4.126.0"
-  }
+  },
+  "packageManager": "bun@1.4.0"
 }
