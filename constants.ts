@@ -447,9 +447,11 @@ La propuesta busca generar una experiencia de lectura sensible y auténtica, com
     color: "bg-dora-yellow",
     content: {
       diggest:
-        "Proyecto de ilustración centrado en la creación de un estilo gráfico propio.",
-      summary:
-        "Hicigrafía es un proyecto de ilustración nombrado a partir del seudónimo hicidora y nace de la búsqueda por desarrollar un estilo gráfico personal. Inspirado en ocurrencias propias y en la forma de ver lo cotidiano, propone un estilo cercano y expresivo que invita a imaginar un mundo más amable y alegre. El proyecto busca crear piezas gráficas que transmitan ternura y dejen espacio para que cada persona conecte con sus emociones y les dé su propia interpretación.",
+        "Proyecto de ilustración y arte gráfico que nace de una forma particular de mirar el mundo.",
+      summary: `Hicigrafía es un proyecto de ilustración autoral que nace de la búsqueda por encontrar una forma propia de mirar el mundo. Su nombre surge de la firma “hicidora”, seudónimo construido a partir de Isidora, y se transforma en hicigrafía como una manera de nombrar este universo de imágenes.
+
+      Las ilustraciones toman situaciones, objetos y personajes reconocibles para transformarlos en escenas absurdas, humorísticas o simbólicas, donde algo aparentemente simple puede esconder una segunda lectura. A través de la caricatura y las asociaciones inesperadas, el proyecto explora temas y experiencias más complejas desde lugares cercanos, buscando provocar una sonrisa, una reflexión o ese momento en que algo hace sentido de una manera inesperada.
+      `
     },
     tags: [
       {
@@ -505,4 +507,4 @@ export const PUBLISHED_PROJECTS = /*#__PURE__*/ PROJECTS.filter(
   (project) => project["published"],
 );
 
-export const BASE_URL = /*#__PURE__*/ "https://www.doradisena.art";
+export const BASE_URL = /*#__PURE__*/ "https://www.doradisena.cl";

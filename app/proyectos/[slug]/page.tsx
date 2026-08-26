@@ -61,7 +61,7 @@ export default async function Projects({ params }: Props) {
         className={clsx(
           "grid grid-cols-1 p-container gap-8",
           "lg:grid-cols-none lg:flex lg:flex-row lg:px-10 lg:pt-14 lg:pb-18 lg:gap-4",
-          "lg:h-screen lg:overflow-y-auto lg:snap-y lg:snap-mandatory",
+          "lg:h-[calc(100svh-2rem)] lg:overflow-y-auto lg:snap-y lg:snap-mandatory",
           "xl:p-container xl:gap-8",
         )}
       >

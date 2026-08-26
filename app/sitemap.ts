@@ -11,7 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     ...PUBLISHED_PROJECTS.map((project) => ({
-      url: `${BASE_URL}/projects/${project["slug"]}`,
+      url: `${BASE_URL}/proyectos/${project["slug"]}`,
       lastModified: NOW(),
       changeFrequency: "daily" as const,
       priority: 0.8,
