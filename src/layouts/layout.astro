@@ -1,0 +1,53 @@
+---
+import "@/src/styles/global.css";
+
+import { BASE_URL } from "@/constants";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "DORA DISEÑA",
+  description = "Diseñadora con experiencia en diseño gráfico, editorial, branding e ilustración, egresada de la UC. Especialista en soluciones visuales efectivas.",
+} = Astro.props;
+
+const pageTitle = title === "DORA DISEÑA" ? title : `${title} • DORA DISEÑA`;
+const canonicalUrl = new URL(Astro.url.pathname, BASE_URL).toString();
+---
+
+<!doctype html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/icon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="DORA DISEÑA" />
+    <meta property="og:locale" content="es" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content={`${BASE_URL}/ui/hero/logo_desktop.svg`}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta
+      name="twitter:image"
+      content={`${BASE_URL}/ui/hero/logo_desktop.svg`}
+    />
+    <title>{pageTitle}</title>
+  </head>
+  <body
+    class="flex min-h-svh flex-col selection:bg-fuchsia-300 selection:text-fuchsia-900 [&_main]:md:mt-8 [&_section]:scroll-mt-[57px] scroll-smooth bg-dora-white font-sans antialiased motion-reduce:scroll-auto"
+  >
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,40 @@
+---
+import { clsx } from "clsx";
+
+interface Breadcrumb {
+  title: string;
+  href: string;
+  className?: string;
+}
+
+interface Props {
+  breadcrumbs: Breadcrumb[];
+  className?: string;
+}
+
+const { breadcrumbs, className } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class={clsx("overflow-x-auto scrollbar-hidden", "text-sm font-medium", className)}>
+  <ol role="list" class="flex flex-row items-center gap-2">
+    {breadcrumbs.map((breadcrumb, index) => (
+      <li
+        class={clsx(
+          "mt-2 last-of-type:pr-4",
+          "first-of-type:text-stone-500 hover:text-stone-600",
+          "transition-colors",
+          "before:content-['/'] before:mr-2 before:text-current only:before:hidden",
+          "first-of-type:before:content-['←']",
+        )}
+      >
+        <a
+          href={breadcrumb.href}
+          class={clsx("truncate", breadcrumb.className)}
+          aria-current={index === breadcrumbs.length - 1 ? "page" : undefined}
+        >
+          {breadcrumb.title}
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>

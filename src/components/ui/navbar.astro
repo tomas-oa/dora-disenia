@@ -1,0 +1,32 @@
+---
+import { clsx } from "clsx";
+
+import { ICON_ARROW_DOWN } from "@/constants";
+
+interface Props {
+  showLogo?: boolean;
+  className?: string;
+}
+
+const { showLogo = true, className } = Astro.props;
+---
+
+<nav
+  class={clsx(
+    "hidden",
+    "md:fixed md:top-0 md:inset-x-0 md:z-50",
+    "md:bg-black md:flex md:flex-row md:justify-between md:w-full",
+    "md:py-4 md:px-navbar",
+    className,
+  )}
+>
+  <a class={clsx(!showLogo && "invisible")} href="/">
+    <img draggable="false" src="/ui/navbar/logo_dora.svg" alt="dora logo" class="invert w-22" />
+  </a>
+
+  <article class="flex flex-row gap-12 md:gap-28 text-dora-white">
+    <a href="/#proyectos">Proyectos</a>
+    <a href="/#contacto">Contacto</a>
+    <a download href="/cv.pdf">CV <span class="inline-block">{ICON_ARROW_DOWN}</span></a>
+  </article>
+</nav>

@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DORA DISEÑA
 
-## Getting Started
+Astro portfolio site with Tailwind CSS v4, one hydrated Preact form island, and a Cloudflare Workers deployment target.
 
-First, run the development server:
+## Development
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+```sh
+bun install
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:4321.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Verification
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sh
+bun run check
+bun run lint
+bun run format:check
+bun run build
+```
 
-## Learn More
+TypeScript 7 is used. Astro's `astro check` is currently incompatible with TypeScript 7, so `check` runs Wrangler type generation plus `tsc --noEmit`; `astro build` validates Astro templates and the production bundle.
 
-To learn more about Next.js, take a look at the following resources:
+Oxc replaces Biome: Oxlint handles linting and Oxfmt handles supported JS, TS, CSS, and config files. Astro templates are formatted by the Astro editor extension and validated by the build.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact form
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create `.dev.vars`:
 
-## Deploy on Vercel
+```sh
+RESEND_API_KEY=...
+PRODUCTION_EMAIL_TO=...
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+For deployment:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```sh
+bunx wrangler secret put RESEND_API_KEY
+bunx wrangler secret put PRODUCTION_EMAIL_TO
+```
+
+## Cloudflare Workers
+
+```sh
+bun run deploy
+```
+
+The site is statically prerendered. `/api/send` runs on demand in the Cloudflare Worker. Preview with `bunx wrangler dev`.

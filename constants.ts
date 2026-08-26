@@ -1,57 +1,57 @@
-import una_ventana_para_el_arte_1 from "@/public/una-ventana-para-el-arte/1.png";
-import una_ventana_para_el_arte_2 from "@/public/una-ventana-para-el-arte/2.png";
-import una_ventana_para_el_arte_3 from "@/public/una-ventana-para-el-arte/3.png";
-import una_ventana_para_el_arte_4 from "@/public/una-ventana-para-el-arte/4.png";
-import una_ventana_para_el_arte_5 from "@/public/una-ventana-para-el-arte/5.png";
-import una_ventana_para_el_arte_6 from "@/public/una-ventana-para-el-arte/6.png";
-import una_ventana_para_el_arte_7 from "@/public/una-ventana-para-el-arte/7.png";
-import una_ventana_para_el_arte_8 from "@/public/una-ventana-para-el-arte/8.png";
-import una_ventana_para_el_arte_cover from "@/public/una-ventana-para-el-arte/cover.png";
+const una_ventana_para_el_arte_1 = "/una-ventana-para-el-arte/1.png";
+const una_ventana_para_el_arte_2 = "/una-ventana-para-el-arte/2.png";
+const una_ventana_para_el_arte_3 = "/una-ventana-para-el-arte/3.png";
+const una_ventana_para_el_arte_4 = "/una-ventana-para-el-arte/4.png";
+const una_ventana_para_el_arte_5 = "/una-ventana-para-el-arte/5.png";
+const una_ventana_para_el_arte_6 = "/una-ventana-para-el-arte/6.png";
+const una_ventana_para_el_arte_7 = "/una-ventana-para-el-arte/7.png";
+const una_ventana_para_el_arte_8 = "/una-ventana-para-el-arte/8.png";
+const una_ventana_para_el_arte_cover = "/una-ventana-para-el-arte/cover.png";
 
-import kombucha_loyca_1 from "@/public/kombucha-loyca/1.png";
-import kombucha_loyca_2 from "@/public/kombucha-loyca/2.png";
-import kombucha_loyca_3 from "@/public/kombucha-loyca/3.png";
-import kombucha_loyca_4 from "@/public/kombucha-loyca/4.png";
-import kombucha_loyca_cover from "@/public/kombucha-loyca/cover.png";
+const kombucha_loyca_1 = "/kombucha-loyca/1.png";
+const kombucha_loyca_2 = "/kombucha-loyca/2.png";
+const kombucha_loyca_3 = "/kombucha-loyca/3.png";
+const kombucha_loyca_4 = "/kombucha-loyca/4.png";
+const kombucha_loyca_cover = "/kombucha-loyca/cover.png";
 
-import frankenstein_1 from "@/public/frankenstein/1.png";
+const frankenstein_1 = "/frankenstein/1.png";
 const frankenstein_2 = "/frankenstein/2.mp4";
-import frankenstein_3 from "@/public/frankenstein/3.png";
-import frankenstein_4 from "@/public/frankenstein/4.gif";
-import frankenstein_5 from "@/public/frankenstein/5.png";
-import frankenstein_cover from "@/public/frankenstein/cover.png";
+const frankenstein_3 = "/frankenstein/3.png";
+const frankenstein_4 = "/frankenstein/4.gif";
+const frankenstein_5 = "/frankenstein/5.png";
+const frankenstein_cover = "/frankenstein/cover.png";
 
-import chao_reunionitis_1 from "@/public/chao-reunionitis/1.png";
-import chao_reunionitis_2 from "@/public/chao-reunionitis/2.png";
-import chao_reunionitis_3 from "@/public/chao-reunionitis/3.png";
-import chao_reunionitis_4 from "@/public/chao-reunionitis/4.png";
-import chao_reunionitis_5 from "@/public/chao-reunionitis/5.png";
-import chao_reunionitis_6 from "@/public/chao-reunionitis/6.png";
-import chao_reunionitis_7 from "@/public/chao-reunionitis/7.png";
-import chao_reunionitis_8 from "@/public/chao-reunionitis/8.png";
-import chao_reunionitis_cover from "@/public/chao-reunionitis/cover.png";
+const chao_reunionitis_1 = "/chao-reunionitis/1.png";
+const chao_reunionitis_2 = "/chao-reunionitis/2.png";
+const chao_reunionitis_3 = "/chao-reunionitis/3.png";
+const chao_reunionitis_4 = "/chao-reunionitis/4.png";
+const chao_reunionitis_5 = "/chao-reunionitis/5.png";
+const chao_reunionitis_6 = "/chao-reunionitis/6.png";
+const chao_reunionitis_7 = "/chao-reunionitis/7.png";
+const chao_reunionitis_8 = "/chao-reunionitis/8.png";
+const chao_reunionitis_cover = "/chao-reunionitis/cover.png";
 
-import hicigrafia_1 from "@/public/hicigrafia/1.png";
-import hicigrafia_2 from "@/public/hicigrafia/2.png";
-import hicigrafia_3 from "@/public/hicigrafia/3.jpeg";
-import hicigrafia_4 from "@/public/hicigrafia/4.png";
-import hicigrafia_5 from "@/public/hicigrafia/5.png";
-import hicigrafia_6 from "@/public/hicigrafia/6.png";
-import hicigrafia_7 from "@/public/hicigrafia/7.png"
-import hicigrafia_8 from "@/public/hicigrafia/8.png";
-import hicigrafia_9 from "@/public/hicigrafia/9.jpeg";
-import hicigrafia_10 from "@/public/hicigrafia/10.png";
-import hicigrafia_cover from "@/public/hicigrafia/cover.png";
+const hicigrafia_1 = "/hicigrafia/1.png";
+const hicigrafia_2 = "/hicigrafia/2.png";
+const hicigrafia_3 = "/hicigrafia/3.jpeg";
+const hicigrafia_4 = "/hicigrafia/4.png";
+const hicigrafia_5 = "/hicigrafia/5.png";
+const hicigrafia_6 = "/hicigrafia/6.png";
+const hicigrafia_7 = "/hicigrafia/7.png";
+const hicigrafia_8 = "/hicigrafia/8.png";
+const hicigrafia_9 = "/hicigrafia/9.jpeg";
+const hicigrafia_10 = "/hicigrafia/10.png";
+const hicigrafia_cover = "/hicigrafia/cover.png";
 
-export const NODE_ENV = /*#__PURE__*/ process.env.NODE_ENV || "development";
+export const NODE_ENV = process.env.NODE_ENV || "development";
 
-export const ICON_ARROW_DOWN = /*#__PURE__*/ "↓";
+export const ICON_ARROW_DOWN = "↓";
 
 export function NOW() {
   return new Date();
 }
 
-const TAGS = /*#__PURE__*/ {
+const TAGS = {
   design: {
     key: "design",
     label: "Diseño integral",
@@ -79,9 +79,9 @@ const TAGS = /*#__PURE__*/ {
   },
 } as const;
 
-export const TAGS_ITERABLE = /*#__PURE__*/ Object.values(TAGS);
+export const TAGS_ITERABLE = Object.values(TAGS);
 
-export const PROJECTS = /*#__PURE__*/ [
+export const PROJECTS = [
   {
     title: "Una ventana para el arte",
     published: true,
@@ -521,8 +521,8 @@ La propuesta busca generar una experiencia de lectura sensible y auténtica, com
   },
 ] as const;
 
-export const PUBLISHED_PROJECTS = /*#__PURE__*/ PROJECTS.filter(
+export const PUBLISHED_PROJECTS = PROJECTS.filter(
   (project) => project["published"],
 );
 
-export const BASE_URL = /*#__PURE__*/ "https://www.doradisena.cl";
+export const BASE_URL = "https://www.doradisena.cl";

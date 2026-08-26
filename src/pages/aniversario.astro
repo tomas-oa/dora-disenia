@@ -1,0 +1,61 @@
+---
+import { clsx } from "clsx";
+
+import Layout from "@/src/layouts/layout.astro";
+
+const galleries = [
+  {
+    id: "primeras",
+    title: "Nuestas primeras fotitos",
+    items: [["/aniversario/primeras/primera.jpeg", "primera", "22 de Julio"], ["/aniversario/primeras/espejo.jpeg", "espejo", "Enamorados"]],
+  },
+  {
+    id: "conciertos",
+    title: "Nuestros conciertos juntos",
+    items: [["/aniversario/conciertos/fosteros.jpeg", "fosteros", "Fosteros"], ["/aniversario/conciertos/gepeto.jpeg", "gepeto", "Gepeto"]],
+  },
+  {
+    id: "comidas",
+    title: "Las comidas saben mejor contigo ❤️",
+    items: [["/aniversario/comidas/menta-jengibre.jpeg", "menta jengibre", "Menta jengibre"], ["/aniversario/comidas/chawarmito.jpeg", "chawarmito", "Mucho amor"], ["/aniversario/comidas/almuerzo.jpeg", "almuerzo", "Almuerzito"], ["/aniversario/comidas/enki.jpeg", "enki", "Sopaipillitas"], ["/aniversario/comidas/fajita.jpeg", "fajita", "Cualquier comida es un lujo contigo"]],
+  },
+  {
+    id: "recuerdos",
+    title: "Recuerdos varios",
+    items: [["/aniversario/misc/tu-calle.jpeg", "tu calle", "Mi calle favorita"], ["/aniversario/misc/bimbo-hosp.jpeg", "bimbo hosp", "Cuidando a bimbito"], ["/aniversario/misc/graduadora.jpeg", "graduadora", "Orgulloso de ti"], ["/aniversario/misc/fantasilandia.jpeg", "fantasilandia", "Antes del raptor"], ["/aniversario/misc/31-minutos.jpeg", "31 minutos", "Bodoque en persona"], ["/aniversario/misc/primero.jpeg", "primero", "Hace un año"]],
+  },
+  {
+    id: "chistosos",
+    title: "Sección chistosa",
+    items: [["/aniversario/chistosos/con-bimbo.jpeg", "con bimbo", "Despertar a tu lado y con bimbito es lo mejor"], ["/aniversario/chistosos/dora-gauguin.jpeg", "dora guauguin", "Dora Gauguin"], ["/aniversario/chistosos/dora-white.jpeg", "dora white", "Dora White"], ["/aniversario/chistosos/omero.jpeg", "omero", "Omerito"]],
+  },
+] as const;
+---
+
+<Layout title="Aniversario">
+  <section class={clsx("flex flex-col items-center justify-center gap-6 p-container scroll-smooth max-w-7xl mx-auto")}>
+    <h1 class="text-2xl font-bold text-center">Feliz aniversario mi amor ❤️</h1>
+    <p class="text-left text-base">Hola bebita mia, hace mucho tiempo que quería hacerte un regalo ñoñito, sé que solo son pixeles en una pantalla pero te juro que está hecho con todo mi amor.</p>
+    <p class="text-left text-base">Aquí hay un poquito de todos los momentos hermosos que me haz dado durante estos dos años juntos. Gracias por hacerme feliz cada día, por entenderme, ser mi compañera y el amor de mi vida, en serio que no tienes idea de lo mucho que te amo y lo importante que eres en mi vida.</p>
+    <p class="text-left text-base">Prometo cuidarte y amarte durante todas las primaveras.</p>
+    <p class="text-3xl font-extrabold text-center">Te amo</p>
+
+    {galleries.map((gallery) => (
+      <section id={gallery.id} class="flex flex-col items-center justify-center">
+        <h3 class="text-xl font-extrabold text-center">{gallery.title}</h3>
+        <div class="grid grid-cols-2 gap-4">
+          {gallery.items.map(([src, alt, caption]) => (
+            <figure class="flex flex-col overflow-hidden border border-black bg-black/10 p-1">
+              <img class="size-full object-cover border border-black" src={src} alt={alt} />
+              <figcaption class="flex items-center justify-center p-2 text-center font-light text-black text-xs">{caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <p class="text-xl font-extrabold text-center">Gracias por aguantarme y quererme todo este tiempo. No hay día que no te piense y me enamore más de ti.</p>
+    <img class="size-full object-cover border border-black" src="/aniversario/fin.jpeg" alt="fin" />
+    <footer class="flex flex-col items-center justify-center text-center"><small>{new Date().getFullYear()} - &copy; Cler SpA. con ♡ - Todos los derechos reservados</small></footer>
+  </section>
+</Layout>
