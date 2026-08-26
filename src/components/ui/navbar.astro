@@ -6,9 +6,10 @@ import { ICON_ARROW_DOWN } from "@/constants";
 interface Props {
   showLogo?: boolean;
   className?: string;
+  hrefBase?: string;
 }
 
-const { showLogo = true, className } = Astro.props;
+const { showLogo = true, className, hrefBase = "" } = Astro.props;
 ---
 
 <nav
@@ -20,13 +21,13 @@ const { showLogo = true, className } = Astro.props;
     className,
   )}
 >
-  <a class={clsx(!showLogo && "invisible")} href="/">
+  <a class={clsx(!showLogo && "invisible")} href={`${hrefBase}/`}>
     <img draggable="false" src="/ui/navbar/logo_dora.svg" alt="dora logo" class="invert w-22" />
   </a>
 
   <article class="flex flex-row gap-12 md:gap-28 text-dora-white">
-    <a href="/#proyectos">Proyectos</a>
-    <a href="/#contacto">Contacto</a>
-    <a download href="/cv.pdf">CV <span class="inline-block">{ICON_ARROW_DOWN}</span></a>
+    <a href={`${hrefBase}/#proyectos`}>Proyectos</a>
+    <a href={`${hrefBase}/#contacto`}>Contacto</a>
+    <a download href={`${hrefBase}/cv.pdf`}>CV <span class="inline-block">{ICON_ARROW_DOWN}</span></a>
   </article>
 </nav>

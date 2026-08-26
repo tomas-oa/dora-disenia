@@ -1,0 +1,23 @@
+{
+  "application": {
+    "id": "50dcb9a4-8701-4406-8024-8716a02be4ba",
+    "name": "Dora Diseña Admin",
+    "type": "self_hosted",
+    "hostname": "admin.doradisena.cl",
+    "session_duration": "24h",
+    "identity_providers": "all_available"
+  },
+  "policies": [
+    {
+      "id": "0bb4f5b7-0813-4aae-95d3-865d5fc924e1",
+      "name": "Dora Diseña Owner",
+      "decision": "allow",
+      "include": [
+        {
+          "selector": "email",
+          "value": "tomas.opazoasd@gmail.com"
+        }
+      ]
+    }
+  ]
+}

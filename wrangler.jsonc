@@ -9,6 +9,25 @@
     "directory": "./dist",
     "not_found_handling": "404-page",
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dora-disenia",
+      "database_id": "5266d41c-c6a3-46d3-a46e-96813fec18a7",
+      "migrations_dir": "drizzle",
+    },
+  ],
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "dora-disenia-media",
+    },
+  ],
+  "vars": {
+    "MEDIA_BASE_URL": "",
+    "ADMIN_EMAIL": "tomas.opazoasd@gmail.com",
+    "ADMIN_DEV_BYPASS": "false",
+  },
   "routes": [
     {
       "pattern": "doradisena.cl",
@@ -16,6 +35,10 @@
     },
     {
       "pattern": "www.doradisena.cl",
+      "custom_domain": true,
+    },
+    {
+      "pattern": "admin.doradisena.cl",
       "custom_domain": true,
     },
   ],

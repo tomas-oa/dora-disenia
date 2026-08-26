@@ -313,7 +313,7 @@ La campaña tomó como eje conceptual la "reunionitis", un término humorístico
   },
   {
     title: "A solas, el jardín",
-    published: false,
+    published: true,
     slug: "a-solas-el-jardin",
     color: "bg-dora-violet",
     content: {
@@ -383,7 +383,7 @@ La propuesta busca generar una experiencia de lectura sensible y auténtica, com
   },
   {
     title: "¿?",
-    published: false,
+    published: true,
     slug: "¿?",
     color: "bg-dora-pink",
     content: {

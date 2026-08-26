@@ -1,69 +1,19 @@
 ---
-import { clsx } from "clsx";
-
-import Breadcrumb from "@/src/components/ui/breadcrumb.astro";
-import Navbar from "@/src/components/ui/navbar.astro";
 import Layout from "@/src/layouts/layout.astro";
-import { PROJECTS } from "@/constants";
+import ProjectDetail from "@/src/components/projects/project-detail.astro";
+import { getProjectBySlug } from "@/src/lib/cms/data";
+import { env } from "cloudflare:workers";
 
-export function getStaticPaths() {
-  return PROJECTS.map((project) => ({
-    params: { slug: project.slug },
-    props: { project },
-  }));
-}
+export const prerender = false;
 
-const { project } = Astro.props;
-const description = project.content.diggest;
+const project = await getProjectBySlug(env, Astro.params.slug ?? "", false);
+if (!project) Astro.response.status = 404;
 ---
 
-<Layout title={project.title} description={description}>
-  <Navbar showLogo />
-
-  <main class={clsx("grid grid-cols-1 p-container gap-8", "lg:grid-cols-none lg:flex lg:flex-row lg:px-10 lg:pt-14 lg:pb-18 lg:gap-4", "lg:h-[calc(100svh-2rem)] lg:overflow-y-auto lg:snap-y lg:snap-mandatory", "xl:p-container xl:gap-8")}>
-    <Breadcrumb
-      className="md:hidden"
-      breadcrumbs={[
-        { title: "Proyectos", href: "/#proyectos" },
-        { title: project.title, href: `/proyectos/${project.slug}` },
-      ]}
-    />
-
-    <section class={clsx("flex flex-col gap-8", "lg:w-1/4 lg:sticky lg:top-0 lg:justify-between")}>
-      <h1 class={clsx("font-display font-medium text-5xl/9 max-w-2xs", "md:text-6xl/11 md:max-w-xs", "lg:text-4xl/7 lg:max-w-sm", "xl:text-5xl/9 xl:max-w-md")}>{project.title}</h1>
-
-      <div class={clsx("flex flex-col gap-2", "lg:flex-col-reverse lg:gap-4")}>
-        <div class={clsx("flex flex-row justify-between items-end", "lg:justify-start lg:gap-2")}>
-          <div class="flex h-fit flex-row divide-x divide-black border border-black">
-            {project.tags.map((tag) => <div class={clsx(tag.className, "aspect-square size-4", "xl:size-5")} />)}
-            <div class={clsx("aspect-square size-4 border border-black bg-black", "xl:size-5")} />
-          </div>
-          <p class={clsx("font-light text-black text-sm leading-4", "xl:text-base/5")}>{project.tags.map((tag) => tag.label).join(", ")}</p>
-        </div>
-
-        <img src={project.storage.cover} alt={project.title} draggable="false" class="border border-black lg:hidden" />
-        <p class={clsx("font-light text-black text-lg leading-5 mt-2 text-pretty", "sm:text-xl", "lg:mt-0", "xl:text-2xl/6")}>{description}</p>
-      </div>
-    </section>
-
-    <div class={clsx("lg:w-3/4 lg:flex lg:flex-col lg:gap-8", "xl:gap-2")}>
-      <article class={clsx("flex flex-col gap-2", "lg:grid lg:flex-none lg:gap-6 lg:grid-cols-3", "lg:snap-start lg:scroll-mt-20")}>
-        <h3 class={clsx("font-display font-medium text-lg leading-4 col-span-1", "sm:text-xl", "lg:text-end", "xl:text-2xl/6")}>Resumen</h3>
-        <p class={clsx("text-sm/4 mb-8", "hyphens-auto whitespace-pre-line", "lg:col-span-2", "lg:columns-2 lg:gap-6")}>{project.content.summary}</p>
-      </article>
-
-      <section class="flex flex-col border divide-y divide-black">
-        <img src={project.storage.cover} alt={project.title} draggable="false" class={clsx("hidden", "lg:block lg:snap-start lg:scroll-mt-[24.5px] lg:aspect-[16/11] lg:object-center lg:object-cover")} />
-        {project.storage.images.map((image) => (
-          <div class="overflow-hidden snap-start scroll-mt-[24.5px]">
-            {image.src.endsWith(".mp4") ? (
-              <video src={image.src} autoplay muted loop class={clsx(image.className, "bg-black size-full")} />
-            ) : (
-              <img src={image.src} alt={image.alt} draggable="false" class={clsx("aspect-[16/11] object-cover", image.className)} />
-            )}
-          </div>
-        ))}
-      </section>
-    </div>
-  </main>
-</Layout>
+{project ? (
+  <Layout title={project.title} description={project.content.diggest}><ProjectDetail project={project} /></Layout>
+) : (
+  <Layout title="Página no encontrada">
+    <main class="flex min-h-svh items-center justify-center p-container"><div class="text-center"><p class="font-display text-6xl">404</p><a class="underline" href="/">Volver al inicio</a></div></main>
+  </Layout>
+)}

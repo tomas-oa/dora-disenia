@@ -40,6 +40,22 @@ bunx wrangler secret put RESEND_API_KEY
 bunx wrangler secret put PRODUCTION_EMAIL_TO
 ```
 
+## CMS
+
+Public project pages read published projects from D1 at request time. If no D1 binding is available, the current `constants.ts` data is used as a local fallback. The initial migration preserves all projects, tags, gallery order, legacy URLs, and media metadata:
+
+```sh
+bun run cms:seed
+bunx wrangler d1 migrations apply dora-disenia --local
+bunx wrangler d1 migrations apply dora-disenia --remote
+```
+
+The admin editor lives at `https://admin.doradisena.cl/`. Cloudflare Access protects the hostname with an owner-only email policy. The worker rewrites `/`, `/projects/*`, `/preview/*`, and `/api/*` on that hostname to internal handlers; the old public-host `/admin/*` route is blocked. The worker also checks the Access email header against `ADMIN_EMAIL`. Projects and media expose readable labels, enum choices, drag-and-drop ordering, keyboard-friendly move controls, and save-time removal. For local-only editor testing, set `ADMIN_DEV_BYPASS=true` in `.dev.vars`; never enable that in production.
+
+Media uploads go to the `MEDIA` R2 binding. Set `MEDIA_BASE_URL` only when using an R2 custom domain; otherwise the worker serves objects through `/media/*`. Uploaded files are stored with project and media IDs, MIME type, size, optional dimensions, alt text, role, and gallery order.
+
+`wrangler.jsonc` is the source of truth for the Worker, custom domains, D1, R2, and runtime vars. The Access API is not exposed by Wrangler; its applied app/policy identifiers and desired settings are recorded in `infra/cloudflare/access.json` for reconciliation. Existing static assets remain in `public/`; the seed migration keeps them working until assets are copied to R2.
+
 ## Cloudflare Workers
 
 ```sh

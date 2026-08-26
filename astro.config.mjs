@@ -9,7 +9,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://www.doradisena.cl",
   trailingSlash: "ignore",
-  output: "static",
+  output: "server",
   session: false,
   adapter: cloudflare({ imageService: "compile" }),
   integrations: [preact(), sitemap()],

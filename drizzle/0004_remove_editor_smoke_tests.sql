@@ -1,0 +1,5 @@
+DELETE FROM projects
+WHERE id IN (
+  '95f281d1-4794-4d1d-a326-3389752835ba',
+  '8830a7d4-0233-492b-83d1-e03decd645f1'
+);

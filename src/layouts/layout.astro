@@ -6,11 +6,13 @@ import { BASE_URL } from "@/constants";
 interface Props {
   title?: string;
   description?: string;
+  noIndex?: boolean;
 }
 
 const {
   title = "DORA DISEÑA",
   description = "Diseñadora con experiencia en diseño gráfico, editorial, branding e ilustración, egresada de la UC. Especialista en soluciones visuales efectivas.",
+  noIndex = false,
 } = Astro.props;
 
 const pageTitle = title === "DORA DISEÑA" ? title : `${title} • DORA DISEÑA`;
@@ -23,9 +25,10 @@ const canonicalUrl = new URL(Astro.url.pathname, BASE_URL).toString();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/icon.svg" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href="/sitemap.xml" />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="description" content={description} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />

@@ -1,0 +1,11 @@
+---
+import Layout from "@/src/layouts/layout.astro";
+import ProjectDetail from "@/src/components/projects/project-detail.astro";
+import { getProjectBySlug } from "@/src/lib/cms/data";
+import { env } from "cloudflare:workers";
+
+const project = await getProjectBySlug(env, Astro.params.slug ?? "", true);
+if (!project) Astro.response.status = 404;
+---
+
+{project ? <Layout title={`Vista previa: ${project.title}`} description={project.content.diggest} noIndex><ProjectDetail project={project} preview /></Layout> : <Layout title="Proyecto no encontrado" noIndex><main class="p-container"><h1 class="font-display text-5xl">Proyecto no encontrado</h1></main></Layout>}
