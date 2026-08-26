@@ -18,6 +18,9 @@
 
 # generated/build metadata
 *.tsbuildinfo
+/.next/
+/.vercel/
+/next-env.d.ts
 
 # test and coverage output
 /coverage/
