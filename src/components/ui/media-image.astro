@@ -1,6 +1,4 @@
 ---
-import { Picture } from "astro:assets";
-
 import type { ProjectMedia } from "@/src/lib/cms/types";
 
 interface Props {
@@ -12,8 +10,6 @@ interface Props {
   class?: string;
   loading?: "eager" | "lazy";
   priority?: boolean;
-  sizes?: string;
-  "transition:name"?: string;
 }
 
 const {
@@ -25,8 +21,6 @@ const {
   class: className,
   loading = "lazy",
   priority = false,
-  sizes,
-  "transition:name": transitionName,
 } = Astro.props;
 
 const source = media?.src ?? sourceProp;
@@ -35,47 +29,16 @@ if (!source) throw new Error("MediaImage requires a source");
 const alt = altProp ?? media?.alt ?? "";
 const width = widthProp ?? media?.width ?? undefined;
 const height = heightProp ?? media?.height ?? undefined;
-const mimeType = media?.mimeType ?? "";
-const isSvg = mimeType === "image/svg+xml" || /\.svg(?:[?#]|$)/i.test(source);
-const isRaster =
-  !isSvg &&
-  (mimeType
-    ? ["image/avif", "image/jpeg", "image/png", "image/webp"].includes(mimeType)
-    : /\.(?:avif|jpe?g|png|webp)(?:[?#]|$)/i.test(source));
-const canOptimize = isRaster && width && height;
-const absoluteSource = new URL(source, Astro.url).toString();
 const imageLoading = priority ? "eager" : loading;
-const fallbackFormat =
-  /\.jpe?g(?:[?#]|$)/i.test(source) || mimeType === "image/jpeg" ? "jpeg" : "png";
 ---
 
-{canOptimize ? (
-  <Picture
-    src={absoluteSource}
-    alt={alt}
-    width={width}
-    height={height}
-    layout="full-width"
-    formats={["avif", "webp"]}
-    fallbackFormat={fallbackFormat}
-    sizes={sizes}
-    class={className}
-    loading={imageLoading}
-    priority={priority}
-    draggable={false}
-    transition:name={transitionName}
-  />
-) : (
-  <img
-    src={source}
-    alt={alt}
-    width={width}
-    height={height}
-    class={className}
-    loading={imageLoading}
-    fetchpriority={priority ? "high" : undefined}
-    decoding={priority ? "sync" : "async"}
-    draggable="false"
-    transition:name={transitionName}
-  />
-)}
+<img
+  src={source}
+  alt={alt}
+  width={width}
+  height={height}
+  class={className}
+  loading={imageLoading}
+  decoding={priority ? "sync" : "async"}
+  draggable="false"
+/>

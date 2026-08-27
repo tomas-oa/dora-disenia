@@ -101,10 +101,8 @@ const publicBase = preview ? BASE_URL : "";
             media={project.storage.coverMedia ?? undefined}
             src={project.storage.cover}
             alt={project.title}
-            sizes="100vw"
             priority
             class="border border-black lg:hidden"
-            transition:name={`project-cover-${project.slug}`}
           />
         )
       }
@@ -158,7 +156,6 @@ const publicBase = preview ? BASE_URL : "";
             media={project.storage.coverMedia ?? undefined}
             src={project.storage.cover}
             alt={project.title}
-            sizes="75vw"
             loading="lazy"
             class={clsx(
               "hidden",
@@ -185,7 +182,6 @@ const publicBase = preview ? BASE_URL : "";
               <MediaImage
                 media={image}
                 alt={image.alt}
-                sizes="75vw"
                 class={clsx("aspect-[16/11] object-cover", image.className)}
               />
             )}

@@ -48,7 +48,7 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
 
       <div class={clsx("hidden", "md:relative md:block md:col-span-2")}>
         <div class="relative size-full">
-          <MediaImage src="/media/ui/lets_work.png" alt="lets work" width={4267} height={1580} sizes="40vw" class="size-full object-cover object-center" />
+          <MediaImage src="/media/ui/lets_work.png" alt="lets work" width={4267} height={1580} class="size-full object-cover object-center" />
           <img src="/media/ui/sticker.svg" alt="" width="144" height="142" draggable="false" class="absolute size-26 left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 animate-spin lg:size-32" loading="lazy" decoding="async" />
         </div>
 
@@ -77,13 +77,13 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
             <img draggable="false" src="/media/ui/arrow.svg" alt="" width="40" height="40" class="size-10 aspect-square rotate-180" loading="lazy" decoding="async" />
           </div>
 
-          <MediaImage media={project.storage.coverMedia ?? undefined} src={project.storage.cover} alt={project.title} sizes="100vw" transition:name={`project-cover-${project.slug}`} class="lg:hidden" />
+          <MediaImage media={project.storage.coverMedia ?? undefined} src={project.storage.cover} alt={project.title} class="lg:hidden" />
         </a>
       ))}
     </section>
 
     <section id="trabajemos" class={clsx("relative flex h-150 flex-col", "lg:hidden")}>
-      <MediaImage src="/media/ui/lets_work.png" alt="lets work" width={4267} height={1580} sizes="100vw" class="absolute inset-0 size-full object-cover object-center" />
+      <MediaImage src="/media/ui/lets_work.png" alt="lets work" width={4267} height={1580} class="absolute inset-0 size-full object-cover object-center" />
       <img src="/media/ui/sticker.svg" alt="" width="144" height="142" draggable="false" class="-translate-x-1/2 absolute left-1/2 size-24 translate-y-54 animate-spin" loading="lazy" decoding="async" />
       <div class="absolute inset-x-0 bottom-12 px-container flex flex-row items-center justify-center gap-3">
         <a href="#contacto" class="z-10 w-fit max-w-56 text-nowrap rounded-full bg-zinc-500 px-7 py-2.5 text-center text-base text-white">Contáctame :)</a>
@@ -105,8 +105,8 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
         <div class={clsx("flex flex-col gap-y-4 bg-dora-white px-6 py-4", "sm:gap-y-3 sm:px-8 sm:py-6", "lg:flex-row lg:gap-x-2")}>
           <div class="relative lg:aspect-video">
             <div class="block h-full">
-              <MediaImage src="/media/ui/contact/gradient_mobile.png" alt="" width={2442} height={1864} sizes="100vw" class="block size-full border border-black lg:hidden" />
-              <MediaImage src="/media/ui/contact/gradient_desktop.png" alt="" width={2905} height={1863} sizes="40vw" class="hidden size-full border border-black lg:block lg:max-w-md lg:h-full xl:max-w-lg" />
+              <MediaImage src="/media/ui/contact/gradient_mobile.png" alt="" width={2442} height={1864} class="block size-full border border-black lg:hidden" />
+              <MediaImage src="/media/ui/contact/gradient_desktop.png" alt="" width={2905} height={1863} class="hidden size-full border border-black lg:block lg:max-w-md lg:h-full xl:max-w-lg" />
             </div>
 
             <a href={HREF_MAIL} target={EXTERNAL_LINK_ATTRS.target} rel={EXTERNAL_LINK_ATTRS.rel} class="flex w-fit flex-row items-center gap-2 absolute top-4 left-8">
