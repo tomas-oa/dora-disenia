@@ -7,7 +7,7 @@ export const prerender = false;
 export const POST: APIRoute = async ({ params, request }) => {
   try {
     const body = await request.json();
-    await saveProject(env, params.id ?? "", parseAdminProjectInput(body));
+    await saveProject(env, params.id!, parseAdminProjectInput(body));
     return Response.json({ ok: true });
   } catch (error) {
     return Response.json(

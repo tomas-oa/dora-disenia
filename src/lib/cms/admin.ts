@@ -4,20 +4,15 @@ import { drizzle } from "drizzle-orm/d1";
 import { media, projectTags, projects, tags } from "@/src/lib/cms/schema";
 import { adminProjectSchema, type AdminProjectInput } from "@/src/lib/cms/project-form";
 
-function assertInput(value: unknown): AdminProjectInput {
+export function parseAdminProjectInput(value: unknown): AdminProjectInput {
   const result = adminProjectSchema.safeParse(value);
   if (!result.success)
     throw new Error(result.error.issues[0]?.message ?? "Invalid project payload");
   return result.data;
 }
 
-export function parseAdminProjectInput(input: unknown) {
-  return assertInput(input);
-}
-
 export async function saveProject(env: Cloudflare.Env, projectId: string, value: unknown) {
-  if (!env.DB) throw new Error("D1 binding missing");
-  const input = assertInput(value);
+  const input = parseAdminProjectInput(value);
   const db = drizzle(env.DB);
   const now = new Date();
   const project = await db.select().from(projects).where(eq(projects.id, projectId)).get();
@@ -70,36 +65,34 @@ export async function saveProject(env: Cloudflare.Env, projectId: string, value:
     ),
   ];
   await db.batch(statements as [(typeof statements)[number], ...(typeof statements)[number][]]);
-  if (env.MEDIA && removedObjectKeys.length > 0) await env.MEDIA.delete(removedObjectKeys);
+  if (removedObjectKeys.length > 0) await env.MEDIA.delete(removedObjectKeys);
 }
 
 export async function createProject(env: Cloudflare.Env) {
-  if (!env.DB) throw new Error("D1 binding missing");
   const id = crypto.randomUUID();
   const now = new Date();
-  const lastProject = await drizzle(env.DB)
+  const db = drizzle(env.DB);
+  const lastProject = await db
     .select({ sortOrder: max(projects.sortOrder) })
     .from(projects)
     .get();
-  await drizzle(env.DB)
-    .insert(projects)
-    .values({
-      id,
-      slug: `nuevo-proyecto-${id.slice(0, 8)}`,
-      title: "Nuevo proyecto",
-      status: "draft",
-      sortOrder: (lastProject?.sortOrder ?? -1) + 1,
-      colorClass: "bg-dora-pink",
-      digest: "",
-      summary: "",
-      createdAt: now,
-      updatedAt: now,
-    });
+  await db.insert(projects).values({
+    id,
+    slug: `nuevo-proyecto-${id.slice(0, 8)}`,
+    title: "Nuevo proyecto",
+    status: "draft",
+    sortOrder: (lastProject?.sortOrder ?? -1) + 1,
+    colorClass: "bg-dora-pink",
+    digest: "",
+    summary: "",
+    createdAt: now,
+    updatedAt: now,
+  });
   return id;
 }
 
 export async function saveProjectOrder(env: Cloudflare.Env, projectIds: unknown) {
-  if (!env.DB || !Array.isArray(projectIds) || !projectIds.every((id) => typeof id === "string"))
+  if (!Array.isArray(projectIds) || !projectIds.every((id) => typeof id === "string"))
     throw new Error("Invalid project order");
   const db = drizzle(env.DB);
   const existingProjects = await db.select({ id: projects.id }).from(projects);

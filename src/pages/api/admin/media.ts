@@ -20,10 +20,6 @@ function dimension(value: FormDataEntryValue | null) {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const bucket = env.MEDIA;
-  if (!bucket || !env.DB)
-    return Response.json({ error: "Media bindings missing" }, { status: 503 });
-
   const form = await request.formData();
   const file = form.get("file");
   const projectId = form.get("projectId");
@@ -42,7 +38,7 @@ export const POST: APIRoute = async ({ request }) => {
   if (role === "cover" && type !== "image")
     return Response.json({ error: "Cover must be an image" }, { status: 415 });
 
-  const className = typeof form.get("className") === "string" ? String(form.get("className")) : "";
+  const className = String(form.get("className") ?? "");
   if (!MEDIA_PRESENTATION_OPTIONS.some((option) => option.value === className))
     return Response.json({ error: "Invalid media presentation" }, { status: 400 });
   const id = crypto.randomUUID();
@@ -50,11 +46,11 @@ export const POST: APIRoute = async ({ request }) => {
   const height = dimension(form.get("height"));
   const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "-");
   const objectKey = `projects/${projectId}/${id}-${safeName}`;
-  await bucket.put(objectKey, file, {
+  await env.MEDIA.put(objectKey, file, {
     httpMetadata: { contentType: file.type },
     customMetadata: { projectId, mediaId: id, role },
   });
-  const baseUrl = env.MEDIA_BASE_URL?.replace(/\/$/, "");
+  const baseUrl = env.MEDIA_BASE_URL.replace(/\/$/, "");
   const publicUrl = baseUrl ? `${baseUrl}/${objectKey}` : `/media/${objectKey}`;
   if (role === "cover")
     await db.update(media).set({ role: "gallery" }).where(eq(media.projectId, projectId));
@@ -65,7 +61,7 @@ export const POST: APIRoute = async ({ request }) => {
     mediaType: type,
     objectKey,
     publicUrl,
-    alt: typeof form.get("alt") === "string" ? String(form.get("alt")) : "",
+    alt: String(form.get("alt") ?? ""),
     className,
     sortOrder: 0,
     mimeType: file.type,

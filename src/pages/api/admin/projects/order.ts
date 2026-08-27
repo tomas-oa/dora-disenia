@@ -7,11 +7,7 @@ export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const body: unknown = await request.json();
-    const projectIds =
-      body && typeof body === "object" && "projectIds" in body
-        ? (body as { projectIds?: unknown }).projectIds
-        : undefined;
+    const { projectIds } = (await request.json()) as { projectIds: unknown };
     await saveProjectOrder(env, projectIds);
     return Response.json({ ok: true });
   } catch (error) {

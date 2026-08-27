@@ -5,7 +5,6 @@ import { cmsSchema, media, projectTags, projects, tags } from "@/src/lib/cms/sch
 import type { ProjectMedia, ProjectTag, PublicProject } from "@/src/lib/cms/types";
 
 function getDb(env: Cloudflare.Env) {
-  if (!env.DB) throw new Error("D1 binding missing");
   return drizzle(env.DB, { schema: cmsSchema });
 }
 

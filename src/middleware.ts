@@ -11,7 +11,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   const isAdminHost = context.url.hostname === ADMIN_HOST;
   const localBypass =
     ["localhost", "127.0.0.1"].includes(context.url.hostname) && env.ADMIN_DEV_BYPASS === "true";
-  const localAdminPath = localBypass && (protectedPath || pathname.startsWith("/admin"));
+  const localAdminPath = localBypass && protectedPath;
   if (!isAdminHost && !protectedPath && !localAdminPath) return next();
 
   const requestEmail = context.request.headers.get("Cf-Access-Authenticated-User-Email");

@@ -1,5 +1,4 @@
 import { useRef, useState } from "preact/hooks";
-import { z } from "astro/zod";
 
 import { adminProjectSchema } from "@/src/lib/cms/project-form";
 import {
@@ -21,40 +20,6 @@ type Props = {
 type SaveStatus = "idle" | "saving" | "saved" | "error";
 type UploadRole = "cover" | "gallery";
 
-const uploadSchema = z
-  .object({
-    file: z.custom<File>(
-      (value) => typeof File !== "undefined" && value instanceof File && value.size > 0,
-      "Elige un archivo primero.",
-    ),
-    role: z.enum(["cover", "gallery"]),
-    className: z.enum(
-      MEDIA_PRESENTATION_OPTIONS.map((option) => option.value) as [
-        ProjectMedia["className"],
-        ...ProjectMedia["className"][],
-      ],
-    ),
-    alt: z.string().trim(),
-  })
-  .superRefine((value, context) => {
-    if (value.role === "cover" && !value.file.type.startsWith("image/")) {
-      context.addIssue({
-        code: "custom",
-        path: ["file"],
-        message: "La portada debe ser una imagen.",
-      });
-    }
-  });
-
-const uploadedMediaSchema = z.object({
-  id: z.string(),
-  objectKey: z.string(),
-  publicUrl: z.string(),
-  mediaType: z.enum(["image", "video"]),
-  width: z.number().int().positive().nullable(),
-  height: z.number().int().positive().nullable(),
-});
-
 function readImageDimensions(file: File) {
   return new Promise<{ width: number | null; height: number | null }>((resolve) => {
     if (!file.type.startsWith("image/")) {
@@ -73,13 +38,6 @@ function readImageDimensions(file: File) {
     };
     image.src = objectUrl;
   });
-}
-
-function responseError(value: unknown, fallback: string) {
-  if (value && typeof value === "object" && "error" in value && typeof value.error === "string") {
-    return value.error;
-  }
-  return fallback;
 }
 
 export default function ProjectEditor({
@@ -138,25 +96,22 @@ export default function ProjectEditor({
 
   async function uploadMedia() {
     const file = fileInput.current?.files?.[0];
-    const parsedUpload = uploadSchema.safeParse({ file, ...uploadFields });
-    if (!parsedUpload.success) {
-      setUploadMessage(parsedUpload.error.issues[0]?.message ?? "Revisa los datos del archivo.");
+    if (!file) {
+      setUploadMessage("Elige un archivo primero.");
+      return;
+    }
+    if (uploadFields.role === "cover" && !file.type.startsWith("image/")) {
+      setUploadMessage("La portada debe ser una imagen.");
       return;
     }
 
-    const {
-      file: validFile,
-      role: validRole,
-      className: validClassName,
-      alt: validAlt,
-    } = parsedUpload.data;
-    const dimensions = await readImageDimensions(validFile);
+    const dimensions = await readImageDimensions(file);
     const data = new FormData();
-    data.append("file", validFile);
+    data.append("file", file);
     data.append("projectId", projectId);
-    data.append("role", validRole);
-    data.append("className", validClassName);
-    data.append("alt", validAlt);
+    data.append("role", uploadFields.role);
+    data.append("className", uploadFields.className);
+    data.append("alt", uploadFields.alt);
     if (dimensions.width && dimensions.height) {
       data.append("width", String(dimensions.width));
       data.append("height", String(dimensions.height));
@@ -165,24 +120,35 @@ export default function ProjectEditor({
 
     try {
       const response = await fetch(`${apiPath}/media`, { method: "POST", body: data });
-      const body: unknown = await response.json();
-      if (!response.ok) throw new Error(responseError(body, "No se pudo subir el archivo."));
-      const result = uploadedMediaSchema.safeParse(body);
-      if (!result.success) throw new Error("Respuesta inválida del servidor.");
+      const body = (await response.json()) as {
+        error?: string;
+        id: string;
+        objectKey: string;
+        publicUrl: string;
+        mediaType: ProjectMedia["mediaType"];
+        width: number | null;
+        height: number | null;
+      };
+      if (!response.ok) throw new Error(body.error ?? "No se pudo subir el archivo.");
 
       const newMedia: ProjectMedia = {
-        ...result.data,
-        src: result.data.publicUrl,
-        alt: validAlt,
-        className: validClassName,
-        role: validRole,
+        id: body.id,
+        objectKey: body.objectKey,
+        publicUrl: body.publicUrl,
+        mediaType: body.mediaType,
+        width: body.width,
+        height: body.height,
+        src: body.publicUrl,
+        alt: uploadFields.alt,
+        className: uploadFields.className,
+        role: uploadFields.role,
         sortOrder: mediaItems.length,
-        mimeType: validFile.type || null,
-        sizeBytes: validFile.size,
+        mimeType: file.type || null,
+        sizeBytes: file.size,
       };
       setMediaItems((items) => [
         ...items.map((item) =>
-          validRole === "cover" ? { ...item, role: "gallery" as const } : item,
+          uploadFields.role === "cover" ? { ...item, role: "gallery" as const } : item,
         ),
         newMedia,
       ]);
@@ -223,8 +189,8 @@ export default function ProjectEditor({
         headers: { "content-type": "application/json" },
         body: JSON.stringify(result.data),
       });
-      const body: unknown = await response.json();
-      if (!response.ok) throw new Error(responseError(body, "No se pudo guardar."));
+      const body = (await response.json()) as { error?: string };
+      if (!response.ok) throw new Error(body.error ?? "No se pudo guardar.");
       setSaveStatus("saved");
       setSaveMessage("Cambios guardados.");
     } catch (error) {

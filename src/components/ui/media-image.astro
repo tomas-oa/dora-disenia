@@ -27,8 +27,8 @@ const source = media?.src ?? sourceProp;
 if (!source) throw new Error("MediaImage requires a source");
 
 const alt = altProp ?? media?.alt ?? "";
-const width = widthProp ?? media?.width ?? undefined;
-const height = heightProp ?? media?.height ?? undefined;
+const width = widthProp ?? media?.width;
+const height = heightProp ?? media?.height;
 const imageLoading = priority ? "eager" : loading;
 ---
 

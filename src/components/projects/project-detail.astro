@@ -194,31 +194,21 @@ const publicBase = preview ? BASE_URL : "";
 
 <script data-astro-rerun>
   const loadVideo = (video: HTMLVideoElement) => {
-    const source = video.dataset.src;
-    if (!source) return;
-
-    video.src = source;
+    video.src = video.dataset.src!;
     video.load();
     void video.play().catch(() => undefined);
   };
 
-  const lazyVideos =
-    document.querySelectorAll<HTMLVideoElement>("video[data-src]");
+  const videoObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        loadVideo(entry.target as HTMLVideoElement);
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "200px 0px" },
+  );
 
-  if ("IntersectionObserver" in window) {
-    const videoObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          loadVideo(entry.target as HTMLVideoElement);
-          observer.unobserve(entry.target);
-        });
-      },
-      { rootMargin: "200px 0px" },
-    );
-
-    lazyVideos.forEach((video) => videoObserver.observe(video));
-  } else {
-    lazyVideos.forEach(loadVideo);
-  }
+  document.querySelectorAll<HTMLVideoElement>("video[data-src]").forEach((video) => videoObserver.observe(video));
 </script>

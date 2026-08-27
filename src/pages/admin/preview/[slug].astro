@@ -4,7 +4,7 @@ import ProjectDetail from "@/src/components/projects/project-detail.astro";
 import { getProjectBySlug } from "@/src/lib/cms/data";
 import { env } from "cloudflare:workers";
 
-const project = await getProjectBySlug(env, Astro.params.slug ?? "", true);
+const project = await getProjectBySlug(env, Astro.params.slug!, true);
 if (!project) Astro.response.status = 404;
 ---
 

@@ -6,7 +6,7 @@ import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
-const project = await getProjectBySlug(env, Astro.params.slug ?? "", false);
+const project = await getProjectBySlug(env, Astro.params.slug!, false);
 if (!project) Astro.response.status = 404;
 ---
 

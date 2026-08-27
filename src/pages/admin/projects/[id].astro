@@ -6,7 +6,8 @@ import { getProjectById, getTags } from "@/src/lib/cms/data";
 import { ADMIN_HOST } from "@/src/lib/cms/hosts";
 import { env } from "cloudflare:workers";
 
-const project = await getProjectById(env, Astro.params.id ?? "");
+const projectId = Astro.params.id!;
+const project = await getProjectById(env, projectId);
 const tags = await getTags(env);
 if (!project) Astro.response.status = 404;
 const adminPath = Astro.url.hostname === ADMIN_HOST ? "" : "/admin";
@@ -24,7 +25,7 @@ const publicProjectUrl = project ? new URL(`/proyectos/${project.slug}`, BASE_UR
       <ProjectEditor
         project={project}
         tags={tags}
-        projectId={Astro.params.id ?? ""}
+        projectId={projectId}
         apiPath={apiPath}
         publicProjectUrl={publicProjectUrl}
         client:load

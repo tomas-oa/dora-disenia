@@ -31,16 +31,9 @@ export const POST: APIRoute = async ({ request }) => {
     return Response.json({ error: "Invalid contact payload" }, { status: 400 });
   }
 
-  const apiKey = env.RESEND_API_KEY;
-  const recipient = env.PRODUCTION_EMAIL_TO;
-
-  if (!apiKey || !recipient) {
-    return Response.json({ error: "Email service is not configured" }, { status: 500 });
-  }
-
-  const { error } = await new Resend(apiKey).emails.send({
+  const { error } = await new Resend(env.RESEND_API_KEY).emails.send({
     from: "Dora Diseña <contacto@doradisena.art>",
-    to: recipient,
+    to: env.PRODUCTION_EMAIL_TO,
     subject: `${payload.name} contactó a través de la web`,
     text: `Nombre: ${payload.name}\nCorreo electrónico: ${payload.email}\nMensaje: ${payload.content}`,
   });
