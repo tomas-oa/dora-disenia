@@ -1,10 +1,23 @@
 ---
 import { clsx } from "clsx";
 
+import { Image } from "astro:assets";
+import arrow from "@/src/assets/ui/arrow.svg";
+import backgroundDesktop from "@/src/assets/ui/contact/background_desktop.svg";
+import backgroundMobile from "@/src/assets/ui/contact/background_mobile.svg";
+import gradientDesktop from "@/src/assets/ui/contact/gradient_desktop.webp";
+import gradientMobile from "@/src/assets/ui/contact/gradient_mobile.webp";
+import dev from "@/src/assets/ui/footer/dev.svg";
+import doraLogo from "@/src/assets/ui/footer/dora_logo.svg";
+import smiley from "@/src/assets/ui/footer/smiley.svg";
+import logoDesktop from "@/src/assets/ui/hero/logo_desktop.svg";
+import logoMobile from "@/src/assets/ui/hero/logo_mobile.svg";
+import letsWork from "@/src/assets/ui/lets_work.png";
+import sticker from "@/src/assets/ui/sticker.svg";
 import { ContactForm } from "@/src/components/forms/contact-form";
 import MediaImage from "@/src/components/ui/media-image.astro";
 import Navbar from "@/src/components/ui/navbar.astro";
-import { getProjects, getTags } from "@/src/lib/cms/data";
+import { getProjects, getSiteAsset, getTags } from "@/src/lib/cms/data";
 import {
   EXTERNAL_LINK_ATTRS,
   HREF_BEHANCE,
@@ -15,18 +28,23 @@ import {
 import Layout from "@/src/layouts/layout.astro";
 import { env } from "cloudflare:workers";
 
-const [publishedProjects, tags] = await Promise.all([getProjects(env, false), getTags(env)]);
+const [publishedProjects, tags, cvAsset] = await Promise.all([
+  getProjects(env, false),
+  getTags(env),
+  getSiteAsset(env, "cv"),
+]);
+const cvHref = cvAsset?.publicUrl ?? "/media/cv.pdf";
 ---
 
 <Layout>
-  <Navbar showLogo={false} />
+  <Navbar showLogo={false} cvHref={cvHref} />
 
   <main class={clsx("flex flex-col")}>
     <section id="inicio" class={clsx("md:grid md:grid-cols-5 md:overflow-hidden")}>
       <div class={clsx("flex flex-col gap-6 p-container", "md:gap-64 md:col-span-3 md:h-fit")}>
         <picture>
-          <source media="(min-width: 768px)" srcset="/media/ui/hero/logo_desktop.svg" />
-          <img alt="logo" src="/media/ui/hero/logo_mobile.svg" width="819" height="376" draggable="false" class="w-9/12 mx-auto max-w-md md:mx-0 md:w-full md:max-w-none" loading="eager" fetchpriority="high" decoding="async" />
+          <source media="(min-width: 768px)" srcset={logoDesktop.src} />
+          <img alt="logo" src={logoMobile.src} width="819" height="376" draggable="false" class="w-9/12 mx-auto max-w-md md:mx-0 md:w-full md:max-w-none" loading="eager" fetchpriority="high" decoding="async" />
         </picture>
 
         <dl class={clsx("mx-auto font-display font-normal text-2xl tracking-wide", "grid h-full max-w-2/3 grid-rows-5 -rotate-90", "md:max-w-full md:rotate-0 md:grid-rows-none md:grid-cols-5 md:w-full md:h-fit")}>
@@ -42,19 +60,19 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
 
         <div class={clsx("flex w-full flex-col items-center justify-between gap-3", "sm:flex-row sm:justify-center", "md:hidden")}>
           <a href="#proyectos" class="w-full max-w-54 rounded-full bg-black px-7 py-2.5 text-center text-lg text-white">Explorar proyectos</a>
-          <a download href="/media/cv.pdf" class="w-full max-w-54 rounded-full bg-dora-blue px-7 py-2.5 text-center text-lg text-white">Descarga mi CV</a>
+          <a download href={cvHref} class="w-full max-w-54 rounded-full bg-dora-blue px-7 py-2.5 text-center text-lg text-white">Descarga mi CV</a>
         </div>
       </div>
 
       <div class={clsx("hidden", "md:relative md:block md:col-span-2")}>
         <div class="relative size-full">
-          <MediaImage src="/media/ui/lets_work.png" alt="lets work" width={4267} height={1580} class="size-full object-cover object-center" />
-          <img src="/media/ui/sticker.svg" alt="" width="144" height="142" draggable="false" class="absolute size-26 left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 animate-spin lg:size-32" loading="lazy" decoding="async" />
+          <img src={letsWork.src} alt="lets work" width="4267" height="1580" class="size-full object-cover object-center" loading="lazy" decoding="async" />
+          <img src={sticker.src} alt="" width="144" height="142" draggable="false" class="absolute size-26 left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 animate-spin lg:size-32" loading="lazy" decoding="async" />
         </div>
 
         <div class={clsx("absolute inset-x-0 bottom-12 px-container", "flex flex-col items-center justify-center gap-4", "xl:flex-row xl:justify-center")}>
           <a href="#proyectos" class="shadow-2xl drop-shadow-2xl max-w-48 w-full rounded-full bg-black px-2 py-2 text-center text-lg text-white lg:px-7 lg:py-2.5 lg:text-nowrap lg:max-w-52 hover:scale-102 transition-transform duration-300">Explorar proyectos</a>
-          <a download href="/media/cv.pdf" class="shadow-2xl drop-shadow-2xl max-w-48 w-full rounded-full bg-dora-blue px-2 py-2.5 text-center text-lg text-white lg:px-7 lg:py-2.5 lg:text-nowrap lg:max-w-52 hover:scale-102 transition-transform duration-300">Descarga mi CV</a>
+          <a download href={cvHref} class="shadow-2xl drop-shadow-2xl max-w-48 w-full rounded-full bg-dora-blue px-2 py-2.5 text-center text-lg text-white lg:px-7 lg:py-2.5 lg:text-nowrap lg:max-w-52 hover:scale-102 transition-transform duration-300">Descarga mi CV</a>
         </div>
       </div>
     </section>
@@ -74,7 +92,7 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
 
           <div class={clsx("hidden", "lg:px-container lg:py-7 lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-16 lg:w-full")}>
             <p class="flex font-light text-black text-xl leading-4">{project.tags.map((tag) => tag.label).join(", ")}</p>
-            <img draggable="false" src="/media/ui/arrow.svg" alt="" width="40" height="40" class="size-10 aspect-square rotate-180" loading="lazy" decoding="async" />
+            <img draggable="false" src={arrow.src} alt="" width="40" height="40" class="size-10 aspect-square rotate-180" loading="lazy" decoding="async" />
           </div>
 
           <MediaImage media={project.storage.coverMedia ?? undefined} src={project.storage.cover} alt={project.title} class="lg:hidden" />
@@ -83,18 +101,18 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
     </section>
 
     <section id="trabajemos" class={clsx("relative flex h-150 flex-col", "lg:hidden")}>
-      <MediaImage src="/media/ui/lets_work.png" alt="lets work" width={4267} height={1580} class="absolute inset-0 size-full object-cover object-center" />
-      <img src="/media/ui/sticker.svg" alt="" width="144" height="142" draggable="false" class="-translate-x-1/2 absolute left-1/2 size-24 translate-y-54 animate-spin" loading="lazy" decoding="async" />
+      <img src={letsWork.src} alt="lets work" width="4267" height="1580" class="absolute inset-0 size-full object-cover object-center" loading="lazy" decoding="async" />
+      <img src={sticker.src} alt="" width="144" height="142" draggable="false" class="-translate-x-1/2 absolute left-1/2 size-24 translate-y-54 animate-spin" loading="lazy" decoding="async" />
       <div class="absolute inset-x-0 bottom-12 px-container flex flex-row items-center justify-center gap-3">
         <a href="#contacto" class="z-10 w-fit max-w-56 text-nowrap rounded-full bg-zinc-500 px-7 py-2.5 text-center text-base text-white">Contáctame :)</a>
-        <a download href="/media/cv.pdf" class="z-10 w-fit max-w-56 text-nowrap rounded-full bg-dora-blue px-7 py-2.5 text-center text-base text-white">Descarga mi CV</a>
+        <a download href={cvHref} class="z-10 w-fit max-w-56 text-nowrap rounded-full bg-dora-blue px-7 py-2.5 text-center text-base text-white">Descarga mi CV</a>
       </div>
     </section>
 
     <section id="contacto" class="relative flex flex-col items-center justify-center p-container">
       <picture class="absolute inset-0 size-full">
-        <source media="(min-width: 1024px)" srcset="/media/ui/contact/background_desktop.svg" />
-        <img src="/media/ui/contact/background_mobile.svg" alt="" width="600" height="1136" draggable="false" class="size-full object-cover object-center" loading="lazy" decoding="async" />
+        <source media="(min-width: 1024px)" srcset={backgroundDesktop.src} />
+        <img src={backgroundMobile.src} alt="" width="600" height="1136" draggable="false" class="size-full object-cover object-center" loading="lazy" decoding="async" />
       </picture>
 
       <div class={clsx("z-10 flex w-full max-w-md flex-col overflow-hidden rounded-xl border border-black", "md:max-w-lg", "lg:max-w-5xl")}>
@@ -105,8 +123,8 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
         <div class={clsx("flex flex-col gap-y-4 bg-dora-white px-6 py-4", "sm:gap-y-3 sm:px-8 sm:py-6", "lg:flex-row lg:gap-x-2")}>
           <div class="relative lg:aspect-video">
             <div class="block h-full">
-              <MediaImage src="/media/ui/contact/gradient_mobile.png" alt="" width={2442} height={1864} class="block size-full border border-black lg:hidden" />
-              <MediaImage src="/media/ui/contact/gradient_desktop.png" alt="" width={2905} height={1863} class="hidden size-full border border-black lg:block lg:max-w-md lg:h-full xl:max-w-lg" />
+              <Image src={gradientMobile} alt="" width={1200} format="webp" class="block size-full border border-black lg:hidden" loading="lazy" decoding="async" />
+              <Image src={gradientDesktop} alt="" width={1600} format="webp" class="hidden size-full border border-black lg:block lg:max-w-md lg:h-full xl:max-w-lg" loading="lazy" decoding="async" />
             </div>
 
             <a href={HREF_MAIL} target={EXTERNAL_LINK_ATTRS.target} rel={EXTERNAL_LINK_ATTRS.rel} class="flex w-fit flex-row items-center gap-2 absolute top-4 left-8">
@@ -131,14 +149,14 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
 
     <footer id="footer" class={clsx("flex flex-col justify-between gap-12 bg-black p-container", "md:flex-row md:items-center md:justify-between md:gap-0 md:py-8")}>
       <div class="flex flex-col items-center gap-2 md:flex-row">
-        <img src="/media/ui/footer/smiley.svg" alt="" draggable="false" class="size-32 object-contain object-center md:size-24" loading="lazy" decoding="async" />
+        <img src={smiley.src} alt="" draggable="false" class="size-32 object-contain object-center md:size-24" loading="lazy" decoding="async" />
         <p class="mx-auto w-1/2 text-pretty text-center font-display text-2xl/6 text-white md:w-full md:mx-0 md:text-left">Gracias <br class="hidden md:block" /> por ver mi portafolio</p>
       </div>
 
       <div class="flex flex-row items-center justify-around gap-20">
-        <a href="/" class="flex flex-col items-center justify-between"><img class="aspect-auto w-32" src="/media/ui/footer/dora_logo.svg" alt="logo" draggable="false" loading="lazy" decoding="async" /></a>
+        <a href="/" class="flex flex-col items-center justify-between"><img class="aspect-auto w-32" src={doraLogo.src} alt="logo" draggable="false" loading="lazy" decoding="async" /></a>
         <a href={HREF_GITHUB} target="_blank" rel="noopener noreferrer" class="flex flex-col items-center justify-between">
-          <img class="aspect-auto w-14 animate-bounce" src="/media/ui/footer/dev.svg" alt="tomas oa" draggable="false" loading="lazy" decoding="async" />
+          <img class="aspect-auto w-14 animate-bounce" src={dev.src} alt="tomas oa" draggable="false" loading="lazy" decoding="async" />
           <pre class="text-pretty text-center font-mono text-white">tomas-oa</pre>
         </a>
       </div>

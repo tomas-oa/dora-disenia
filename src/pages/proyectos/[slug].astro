@@ -1,17 +1,20 @@
 ---
 import Layout from "@/src/layouts/layout.astro";
 import ProjectDetail from "@/src/components/projects/project-detail.astro";
-import { getProjectBySlug } from "@/src/lib/cms/data";
+import { getProjectBySlug, getSiteAsset } from "@/src/lib/cms/data";
 import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
-const project = await getProjectBySlug(env, Astro.params.slug!, false);
+const [project, cvAsset] = await Promise.all([
+  getProjectBySlug(env, Astro.params.slug!, false),
+  getSiteAsset(env, "cv"),
+]);
 if (!project) Astro.response.status = 404;
 ---
 
 {project ? (
-  <Layout title={project.title} description={project.content.diggest}><ProjectDetail project={project} /></Layout>
+  <Layout title={project.title} description={project.content.diggest}><ProjectDetail project={project} cvHref={cvAsset?.publicUrl} /></Layout>
 ) : (
   <Layout title="Página no encontrada">
     <main class="flex min-h-svh items-center justify-center p-container"><div class="text-center"><p class="font-display text-6xl">404</p><a class="underline" href="/">Volver al inicio</a></div></main>

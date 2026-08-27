@@ -10,9 +10,10 @@ import type { ProjectTag, PublicProject } from "@/src/lib/cms/types";
 interface Props {
   project: PublicProject;
   preview?: boolean;
+  cvHref?: string;
 }
 
-const { project, preview = false } = Astro.props;
+const { project, preview = false, cvHref = "/media/cv.pdf" } = Astro.props;
 const description = project.content.diggest;
 const publicBase = preview ? BASE_URL : "";
 ---
@@ -24,7 +25,7 @@ const publicBase = preview ? BASE_URL : "";
     </div>
   )
 }
-<Navbar showLogo hrefBase={publicBase} />
+<Navbar showLogo hrefBase={publicBase} cvHref={cvHref} />
 
 <main
   class={clsx(

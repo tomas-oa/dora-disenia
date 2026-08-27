@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import icon from "@/src/assets/ui/icon.svg";
 
 export const GET: APIRoute = () => {
   return Response.json({
@@ -9,6 +10,6 @@ export const GET: APIRoute = () => {
     display: "standalone",
     background_color: "#fffcf7",
     theme_color: "#fffcf7",
-    icons: [{ src: "/media/icon.svg", sizes: "any", type: "image/svg+xml" }],
+    icons: [{ src: icon.src, sizes: "any", type: "image/svg+xml" }],
   });
 };

@@ -76,4 +76,14 @@ export const media = sqliteTable(
   ],
 );
 
-export const cmsSchema = { projects, tags, projectTags, media };
+export const siteAssets = sqliteTable("site_assets", {
+  key: text("key").primaryKey(),
+  objectKey: text("object_key").notNull(),
+  publicUrl: text("public_url").notNull(),
+  mimeType: text("mime_type").notNull(),
+  sizeBytes: integer("size_bytes").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+});
+
+export const cmsSchema = { projects, tags, projectTags, media, siteAssets };

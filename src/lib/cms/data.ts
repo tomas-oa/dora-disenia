@@ -1,7 +1,7 @@
 import { asc, eq, inArray } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 
-import { cmsSchema, media, projectTags, projects, tags } from "@/src/lib/cms/schema";
+import { cmsSchema, media, projectTags, projects, siteAssets, tags } from "@/src/lib/cms/schema";
 import type { ProjectMedia, ProjectTag, PublicProject } from "@/src/lib/cms/types";
 
 function getDb(env: Cloudflare.Env) {
@@ -83,6 +83,10 @@ export async function getTags(env: Cloudflare.Env): Promise<ProjectTag[]> {
     .select({ key: tags.key, label: tags.label, className: tags.className })
     .from(tags)
     .orderBy(asc(tags.sortOrder), asc(tags.key));
+}
+
+export async function getSiteAsset(env: Cloudflare.Env, key: string) {
+  return getDb(env).select().from(siteAssets).where(eq(siteAssets.key, key)).get();
 }
 
 export async function getProjectBySlug(env: Cloudflare.Env, slug: string, includeDrafts = false) {

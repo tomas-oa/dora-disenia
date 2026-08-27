@@ -3,6 +3,8 @@ import "@/src/styles/global.css";
 
 import { Font } from "astro:assets";
 import { ClientRouter, fade } from "astro:transitions";
+import icon from "@/src/assets/ui/icon.svg";
+import logoDesktop from "@/src/assets/ui/hero/logo_desktop.svg";
 import { BASE_URL } from "@/src/lib/site";
 
 interface Props {
@@ -19,6 +21,7 @@ const {
 
 const pageTitle = title === "DORA DISEÑA" ? title : `${title} • DORA DISEÑA`;
 const canonicalUrl = new URL(Astro.url.pathname, BASE_URL).toString();
+const socialImageUrl = new URL(logoDesktop.src, BASE_URL).toString();
 ---
 
 <!doctype html>
@@ -26,7 +29,7 @@ const canonicalUrl = new URL(Astro.url.pathname, BASE_URL).toString();
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/media/icon.svg" />
+    <link rel="icon" href={icon.src} />
     <link rel="sitemap" href="/sitemap.xml" />
     <link rel="canonical" href={canonicalUrl} />
     <meta name="description" content={description} />
@@ -39,7 +42,7 @@ const canonicalUrl = new URL(Astro.url.pathname, BASE_URL).toString();
     <meta property="og:type" content="website" />
     <meta
       property="og:image"
-      content={`${BASE_URL}/media/ui/hero/logo_desktop.svg`}
+      content={socialImageUrl}
     />
     <ClientRouter />
     <Font cssVariable="--font-coolvetica" />
@@ -48,7 +51,7 @@ const canonicalUrl = new URL(Astro.url.pathname, BASE_URL).toString();
     <meta name="twitter:description" content={description} />
     <meta
       name="twitter:image"
-      content={`${BASE_URL}/media/ui/hero/logo_desktop.svg`}
+      content={socialImageUrl}
     />
     <title>{pageTitle}</title>
   </head>

@@ -1,11 +1,12 @@
 ---
 import Layout from "@/src/layouts/layout.astro";
+import CvEditor from "@/src/components/admin/cv-editor";
 import ProjectList from "@/src/components/admin/project-list";
-import { getProjects } from "@/src/lib/cms/data";
+import { getProjects, getSiteAsset } from "@/src/lib/cms/data";
 import { env } from "cloudflare:workers";
 import { ADMIN_HOST } from "@/src/lib/cms/hosts";
 
-const projects = await getProjects(env, true);
+const [projects, cvAsset] = await Promise.all([getProjects(env, true), getSiteAsset(env, "cv")]);
 const adminPath = Astro.url.hostname === ADMIN_HOST ? "" : "/admin";
 const apiPath = Astro.url.hostname === ADMIN_HOST ? "/api" : "/api/admin";
 ---
@@ -15,6 +16,12 @@ const apiPath = Astro.url.hostname === ADMIN_HOST ? "/api" : "/api/admin";
     <header class="flex items-end justify-between gap-4 border-b border-black pb-4"><div><p class="font-display text-sm uppercase">Dora Diseña</p><h1 class="font-display text-5xl">Editor</h1></div><form action={`${apiPath}/projects`} method="post"><button class="rounded-full bg-black px-5 py-2 text-white" type="submit">Nuevo proyecto</button></form></header>
     <p class="text-sm">Contenido publicado aparece en el portafolio. Los borradores solo son visibles en vista previa.</p>
     <p class="text-sm">Arrastra proyectos para cambiar el orden de la portada. El cambio se guarda automáticamente.</p>
+    <CvEditor
+      apiPath={apiPath}
+      cvUrl={cvAsset?.publicUrl ?? "/media/cv.pdf"}
+      sizeBytes={cvAsset?.sizeBytes ?? null}
+      client:load
+    />
     <ProjectList projects={projects} adminPath={adminPath} apiPath={apiPath} client:load />
   </main>
 </Layout>
