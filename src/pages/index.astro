@@ -2,6 +2,7 @@
 import { clsx } from "clsx";
 
 import { ContactForm } from "@/src/components/forms/contact-form";
+import MediaImage from "@/src/components/ui/media-image.astro";
 import Navbar from "@/src/components/ui/navbar.astro";
 import { getProjects, getTags } from "@/src/lib/cms/data";
 import {
@@ -25,7 +26,7 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
       <div class={clsx("flex flex-col gap-6 p-container", "md:gap-64 md:col-span-3 md:h-fit")}>
         <picture>
           <source media="(min-width: 768px)" srcset="/media/ui/hero/logo_desktop.svg" />
-          <img alt="logo" src="/media/ui/hero/logo_mobile.svg" draggable="false" class="w-9/12 mx-auto max-w-md md:mx-0 md:w-full md:max-w-none" loading="eager" fetchpriority="high" decoding="async" />
+          <img alt="logo" src="/media/ui/hero/logo_mobile.svg" width="819" height="376" draggable="false" class="w-9/12 mx-auto max-w-md md:mx-0 md:w-full md:max-w-none" loading="eager" fetchpriority="high" decoding="async" />
         </picture>
 
         <dl class={clsx("mx-auto font-display font-normal text-2xl tracking-wide", "grid h-full max-w-2/3 grid-rows-5 -rotate-90", "md:max-w-full md:rotate-0 md:grid-rows-none md:grid-cols-5 md:w-full md:h-fit")}>
@@ -47,8 +48,8 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
 
       <div class={clsx("hidden", "md:relative md:block md:col-span-2")}>
         <div class="relative size-full">
-          <img src="/media/ui/lets_work.png" alt="lets work" draggable="false" class="size-full object-cover object-center" decoding="async" />
-          <img src="/media/ui/sticker.svg" alt="sticker" draggable="false" class="absolute size-26 left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 animate-spin lg:size-32" loading="lazy" decoding="async" />
+          <MediaImage src="/media/ui/lets_work.png" alt="lets work" width={4267} height={1580} sizes="40vw" class="size-full object-cover object-center" />
+          <img src="/media/ui/sticker.svg" alt="" width="144" height="142" draggable="false" class="absolute size-26 left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 animate-spin lg:size-32" loading="lazy" decoding="async" />
         </div>
 
         <div class={clsx("absolute inset-x-0 bottom-12 px-container", "flex flex-col items-center justify-center gap-4", "xl:flex-row xl:justify-center")}>
@@ -60,11 +61,11 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
 
     <section id="proyectos" class={clsx("flex flex-col divide-y divide-black border-y")}>
       {publishedProjects.map((project) => (
-        <a href={`/proyectos/${project.slug}`} class={clsx("flex flex-col divide-y divide-black", "lg:divide-none lg:flex-row lg:justify-between")}>
+        <a href={`/proyectos/${project.slug}`} data-astro-prefetch="tap" class={clsx("flex flex-col divide-y divide-black", "lg:divide-none lg:flex-row lg:justify-between")}>
           <div class={clsx("flex flex-row items-center justify-between px-container py-7", "lg:w-full")}>
             <div class="flex flex-row items-center gap-5">
               <div class={clsx(project.color, "aspect-square size-5 border")} />
-              <h2 class={clsx("w-3/4 text-balance font-display font-medium text-3xl text-black leading-6", "sm:w-full", "lg:text-4xl/8")}>{project.title}</h2>
+              <h2 transition:name={`project-title-${project.slug}`} class={clsx("w-3/4 text-balance font-display font-medium text-3xl text-black leading-6", "sm:w-full", "lg:text-4xl/8")}>{project.title}</h2>
             </div>
             <div class="flex flex-col items-end gap-1 lg:hidden">
               {project.tags.map((tag) => <p class="flex font-light text-black leading-4">{tag.label}</p>)}
@@ -73,17 +74,17 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
 
           <div class={clsx("hidden", "lg:px-container lg:py-7 lg:flex lg:flex-row lg:justify-between lg:items-center lg:gap-16 lg:w-full")}>
             <p class="flex font-light text-black text-xl leading-4">{project.tags.map((tag) => tag.label).join(", ")}</p>
-            <img draggable="false" src="/media/ui/arrow.svg" alt="arrow" class="size-10 aspect-square rotate-180" loading="lazy" decoding="async" />
+            <img draggable="false" src="/media/ui/arrow.svg" alt="" width="40" height="40" class="size-10 aspect-square rotate-180" loading="lazy" decoding="async" />
           </div>
 
-          <img class="lg:hidden" src={project.storage.cover} alt={project.title} draggable="false" loading="lazy" decoding="async" />
+          <MediaImage media={project.storage.coverMedia ?? undefined} src={project.storage.cover} alt={project.title} sizes="100vw" transition:name={`project-cover-${project.slug}`} class="lg:hidden" />
         </a>
       ))}
     </section>
 
     <section id="trabajemos" class={clsx("relative flex h-150 flex-col", "lg:hidden")}>
-      <img src="/media/ui/lets_work.png" alt="lets work" draggable="false" class="absolute inset-0 size-full object-cover object-center" loading="lazy" decoding="async" />
-      <img src="/media/ui/sticker.svg" alt="sticker" draggable="false" class="-translate-x-1/2 absolute left-1/2 size-24 translate-y-54 animate-spin" loading="lazy" decoding="async" />
+      <MediaImage src="/media/ui/lets_work.png" alt="lets work" width={4267} height={1580} sizes="100vw" class="absolute inset-0 size-full object-cover object-center" />
+      <img src="/media/ui/sticker.svg" alt="" width="144" height="142" draggable="false" class="-translate-x-1/2 absolute left-1/2 size-24 translate-y-54 animate-spin" loading="lazy" decoding="async" />
       <div class="absolute inset-x-0 bottom-12 px-container flex flex-row items-center justify-center gap-3">
         <a href="#contacto" class="z-10 w-fit max-w-56 text-nowrap rounded-full bg-zinc-500 px-7 py-2.5 text-center text-base text-white">Contáctame :)</a>
         <a download href="/media/cv.pdf" class="z-10 w-fit max-w-56 text-nowrap rounded-full bg-dora-blue px-7 py-2.5 text-center text-base text-white">Descarga mi CV</a>
@@ -93,7 +94,7 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
     <section id="contacto" class="relative flex flex-col items-center justify-center p-container">
       <picture class="absolute inset-0 size-full">
         <source media="(min-width: 1024px)" srcset="/media/ui/contact/background_desktop.svg" />
-        <img src="/media/ui/contact/background_mobile.svg" alt="contact" draggable="false" class="size-full object-cover object-center" loading="lazy" decoding="async" />
+        <img src="/media/ui/contact/background_mobile.svg" alt="" width="600" height="1136" draggable="false" class="size-full object-cover object-center" loading="lazy" decoding="async" />
       </picture>
 
       <div class={clsx("z-10 flex w-full max-w-md flex-col overflow-hidden rounded-xl border border-black", "md:max-w-lg", "lg:max-w-5xl")}>
@@ -103,10 +104,10 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
 
         <div class={clsx("flex flex-col gap-y-4 bg-dora-white px-6 py-4", "sm:gap-y-3 sm:px-8 sm:py-6", "lg:flex-row lg:gap-x-2")}>
           <div class="relative lg:aspect-video">
-            <picture class="block h-full">
-              <source media="(min-width: 1024px)" srcset="/media/ui/contact/gradient_desktop.png" />
-              <img class="block size-full border border-black lg:max-w-md lg:h-full xl:max-w-lg" src="/media/ui/contact/gradient_mobile.png" alt="gradient" draggable="false" loading="lazy" decoding="async" />
-            </picture>
+            <div class="block h-full">
+              <MediaImage src="/media/ui/contact/gradient_mobile.png" alt="" width={2442} height={1864} sizes="100vw" class="block size-full border border-black lg:hidden" />
+              <MediaImage src="/media/ui/contact/gradient_desktop.png" alt="" width={2905} height={1863} sizes="40vw" class="hidden size-full border border-black lg:block lg:max-w-md lg:h-full xl:max-w-lg" />
+            </div>
 
             <a href={HREF_MAIL} target={EXTERNAL_LINK_ATTRS.target} rel={EXTERNAL_LINK_ATTRS.rel} class="flex w-fit flex-row items-center gap-2 absolute top-4 left-8">
               <div class="size-3 rounded-full border border-black" /><h3 class="font-light text-lg/2 underline">Correo</h3>
@@ -130,7 +131,7 @@ const [publishedProjects, tags] = await Promise.all([getProjects(env, false), ge
 
     <footer id="footer" class={clsx("flex flex-col justify-between gap-12 bg-black p-container", "md:flex-row md:items-center md:justify-between md:gap-0 md:py-8")}>
       <div class="flex flex-col items-center gap-2 md:flex-row">
-        <img src="/media/ui/footer/smiley.svg" alt="smiley" draggable="false" class="size-32 object-contain object-center md:size-24" loading="lazy" decoding="async" />
+        <img src="/media/ui/footer/smiley.svg" alt="" draggable="false" class="size-32 object-contain object-center md:size-24" loading="lazy" decoding="async" />
         <p class="mx-auto w-1/2 text-pretty text-center font-display text-2xl/6 text-white md:w-full md:mx-0 md:text-left">Gracias <br class="hidden md:block" /> por ver mi portafolio</p>
       </div>
 

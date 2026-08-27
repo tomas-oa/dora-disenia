@@ -13,6 +13,12 @@ function mediaType(type: string) {
   return null;
 }
 
+function dimension(value: FormDataEntryValue | null) {
+  if (typeof value !== "string" || !/^\d+$/.test(value)) return null;
+  const parsed = Number(value);
+  return parsed > 0 && parsed <= 100_000 ? parsed : null;
+}
+
 export const POST: APIRoute = async ({ request }) => {
   const bucket = env.MEDIA;
   if (!bucket || !env.DB)
@@ -40,6 +46,8 @@ export const POST: APIRoute = async ({ request }) => {
   if (!MEDIA_PRESENTATION_OPTIONS.some((option) => option.value === className))
     return Response.json({ error: "Invalid media presentation" }, { status: 400 });
   const id = crypto.randomUUID();
+  const width = dimension(form.get("width"));
+  const height = dimension(form.get("height"));
   const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "-");
   const objectKey = `projects/${projectId}/${id}-${safeName}`;
   await bucket.put(objectKey, file, {
@@ -62,7 +70,12 @@ export const POST: APIRoute = async ({ request }) => {
     sortOrder: 0,
     mimeType: file.type,
     sizeBytes: file.size,
+    width,
+    height,
     createdAt: new Date(),
   });
-  return Response.json({ id, objectKey, publicUrl, mediaType: type }, { status: 201 });
+  return Response.json(
+    { id, objectKey, publicUrl, mediaType: type, width, height },
+    { status: 201 },
+  );
 };

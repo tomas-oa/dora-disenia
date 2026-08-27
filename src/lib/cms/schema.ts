@@ -77,6 +77,3 @@ export const media = sqliteTable(
 );
 
 export const cmsSchema = { projects, tags, projectTags, media };
-
-export type CmsProject = typeof projects.$inferSelect;
-export type CmsMedia = typeof media.$inferSelect;

@@ -4,7 +4,6 @@ import { clsx } from "clsx";
 interface Breadcrumb {
   title: string;
   href: string;
-  className?: string;
 }
 
 interface Props {
@@ -29,7 +28,7 @@ const { breadcrumbs, className } = Astro.props;
       >
         <a
           href={breadcrumb.href}
-          class={clsx("truncate", breadcrumb.className)}
+          class="truncate"
           aria-current={index === breadcrumbs.length - 1 ? "page" : undefined}
         >
           {breadcrumb.title}

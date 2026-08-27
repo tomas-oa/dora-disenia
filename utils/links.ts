@@ -7,8 +7,6 @@ export const HREF_LINKEDIN =
 export const HREF_BEHANCE =
   "https://www.behance.net/doradisenadora" as const;
 
-export const HREF_CV = "/cv.pdf" as const;
-
 export const HREF_GITHUB = "https://github.com/tomas-oa" as const;
 
 export const EXTERNAL_LINK_ATTRS = {

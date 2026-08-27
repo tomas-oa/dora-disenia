@@ -2,9 +2,10 @@
 import { clsx } from "clsx";
 
 import Breadcrumb from "@/src/components/ui/breadcrumb.astro";
+import MediaImage from "@/src/components/ui/media-image.astro";
 import Navbar from "@/src/components/ui/navbar.astro";
 import { BASE_URL } from "@/src/lib/site";
-import type { PublicProject } from "@/src/lib/cms/types";
+import type { ProjectTag, PublicProject } from "@/src/lib/cms/types";
 
 interface Props {
   project: PublicProject;
@@ -54,6 +55,7 @@ const publicBase = preview ? BASE_URL : "";
         "lg:text-4xl/7 lg:max-w-sm",
         "xl:text-5xl/9 xl:max-w-md",
       )}
+      transition:name={`project-title-${project.slug}`}
     >
       {project.title}
     </h1>
@@ -95,12 +97,14 @@ const publicBase = preview ? BASE_URL : "";
 
       {
         project.storage.cover && (
-          <img
+          <MediaImage
+            media={project.storage.coverMedia ?? undefined}
             src={project.storage.cover}
             alt={project.title}
-            draggable="false"
+            sizes="100vw"
+            priority
             class="border border-black lg:hidden"
-            decoding="async"
+            transition:name={`project-cover-${project.slug}`}
           />
         )
       }
@@ -150,15 +154,16 @@ const publicBase = preview ? BASE_URL : "";
     <section class="flex flex-col border divide-y divide-black">
       {
         project.storage.cover && (
-          <img
+          <MediaImage
+            media={project.storage.coverMedia ?? undefined}
             src={project.storage.cover}
             alt={project.title}
-            draggable="false"
+            sizes="75vw"
+            loading="lazy"
             class={clsx(
               "hidden",
               "lg:block lg:snap-start lg:scroll-mt-[24.5px] lg:aspect-[16/11] lg:object-center lg:object-cover",
             )}
-            decoding="async"
           />
         )
       }
@@ -177,12 +182,10 @@ const publicBase = preview ? BASE_URL : "";
                 class={clsx(image.className, "bg-black size-full")}
               />
             ) : (
-              <img
-                src={image.src}
+              <MediaImage
+                media={image}
                 alt={image.alt}
-                draggable="false"
-                loading="lazy"
-                decoding="async"
+                sizes="75vw"
                 class={clsx("aspect-[16/11] object-cover", image.className)}
               />
             )}
@@ -193,7 +196,7 @@ const publicBase = preview ? BASE_URL : "";
   </div>
 </main>
 
-<script>
+<script data-astro-rerun>
   const loadVideo = (video: HTMLVideoElement) => {
     const source = video.dataset.src;
     if (!source) return;

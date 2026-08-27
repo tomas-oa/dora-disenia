@@ -32,7 +32,25 @@ export default defineConfig({
       },
     },
   ],
-  adapter: cloudflare({ imageService: "compile" }),
+  prefetch: {
+    prefetchAll: false,
+    defaultStrategy: "tap",
+  },
+  image: {
+    remotePatterns: [
+      { protocol: "https", hostname: "doradisena.cl", pathname: "/media/**" },
+      { protocol: "https", hostname: "www.doradisena.cl", pathname: "/media/**" },
+      { protocol: "https", hostname: "**.doradisena.cl", pathname: "/media/**" },
+      { protocol: "http", hostname: "doradisena.cl", pathname: "/media/**" },
+      { protocol: "http", hostname: "www.doradisena.cl", pathname: "/media/**" },
+      { protocol: "http", hostname: "**.doradisena.cl", pathname: "/media/**" },
+      { protocol: "http", hostname: "localhost", pathname: "/media/**" },
+      { protocol: "http", hostname: "127.0.0.1", pathname: "/media/**" },
+    ],
+  },
+  adapter: cloudflare({
+    imageService: { build: "compile", runtime: "cloudflare-binding" },
+  }),
   integrations: [preact(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

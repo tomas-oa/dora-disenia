@@ -2,6 +2,7 @@
 import "@/src/styles/global.css";
 
 import { Font } from "astro:assets";
+import { ClientRouter, fade } from "astro:transitions";
 import { BASE_URL } from "@/src/lib/site";
 
 interface Props {
@@ -40,6 +41,7 @@ const canonicalUrl = new URL(Astro.url.pathname, BASE_URL).toString();
       property="og:image"
       content={`${BASE_URL}/media/ui/hero/logo_desktop.svg`}
     />
+    <ClientRouter />
     <Font cssVariable="--font-coolvetica" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
@@ -51,6 +53,7 @@ const canonicalUrl = new URL(Astro.url.pathname, BASE_URL).toString();
     <title>{pageTitle}</title>
   </head>
   <body
+    transition:animate={fade({ duration: "0.42s" })}
     class="flex min-h-svh flex-col selection:bg-fuchsia-300 selection:text-fuchsia-900 [&_main]:md:mt-8 [&_section]:scroll-mt-[57px] scroll-smooth bg-dora-white font-sans antialiased motion-reduce:scroll-auto"
   >
     <slot />

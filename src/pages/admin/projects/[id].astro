@@ -101,6 +101,23 @@ const selectedColorClass = project && PROJECT_COLOR_OPTIONS.some((option) => opt
   });
 
   const escapeHtml = (value) => String(value ?? "").replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
+  const readImageDimensions = (file) => new Promise((resolve) => {
+    if (!file.type.startsWith("image/")) {
+      resolve({ width: null, height: null });
+      return;
+    }
+    const image = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    image.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve({ width: image.naturalWidth, height: image.naturalHeight });
+    };
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve({ width: null, height: null });
+    };
+    image.src = objectUrl;
+  });
   const presentationOptions = [
     ["", "Predeterminado"],
     ["object-top", "Encuadre arriba"],
@@ -208,18 +225,23 @@ const selectedColorClass = project && PROJECT_COLOR_OPTIONS.some((option) => opt
     const role = document.querySelector("#media-role")?.value === "cover" ? "cover" : "gallery";
     const className = document.querySelector("#media-class")?.value ?? "";
     const alt = document.querySelector("#media-alt")?.value.trim() ?? "";
+    const dimensions = await readImageDimensions(file);
     const data = new FormData();
     data.append("file", file);
     data.append("projectId", String(projectId));
     data.append("role", role);
     data.append("className", className);
     data.append("alt", alt);
+    if (dimensions.width && dimensions.height) {
+      data.append("width", String(dimensions.width));
+      data.append("height", String(dimensions.height));
+    }
     uploadStatus.textContent = "Subiendo…";
     try {
       const response = await fetch(`${apiPath}/media`, { method: "POST", body: data });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error);
-      const card = createMediaCard({ id: result.id, src: result.publicUrl, alt, className, mediaType: result.mediaType, role, objectKey: result.objectKey, publicUrl: result.publicUrl, mimeType: file.type, sizeBytes: file.size, width: null, height: null });
+      const card = createMediaCard({ id: result.id, src: result.publicUrl, alt, className, mediaType: result.mediaType, role, objectKey: result.objectKey, publicUrl: result.publicUrl, mimeType: file.type, sizeBytes: file.size, width: result.width, height: result.height });
       if (role === "cover") demoteOtherCovers(card);
       mediaList?.append(card);
       uploadStatus.textContent = "Archivo añadido. Revisa sus datos y guarda los cambios.";

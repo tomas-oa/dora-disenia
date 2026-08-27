@@ -7,8 +7,6 @@ export const PROJECT_COLOR_OPTIONS = [
   { value: "bg-dora-yellow", label: "Amarillo" },
 ] as const;
 
-export type ProjectColor = (typeof PROJECT_COLOR_OPTIONS)[number]["value"];
-
 export const MEDIA_PRESENTATION_OPTIONS = [
   { value: "", label: "Predeterminado" },
   { value: "object-top", label: "Encuadre arriba" },
@@ -17,8 +15,6 @@ export const MEDIA_PRESENTATION_OPTIONS = [
   { value: "scale-120", label: "Ampliar 120%" },
   { value: "scale-140", label: "Ampliar 140%" },
 ] as const;
-
-export type MediaPresentation = (typeof MEDIA_PRESENTATION_OPTIONS)[number]["value"];
 
 export type ProjectTag = {
   key: string;
