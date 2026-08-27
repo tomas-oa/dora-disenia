@@ -2,80 +2,13 @@ import { eq, inArray, max } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 
 import { media, projectTags, projects, tags } from "@/src/lib/cms/schema";
-import {
-  MEDIA_PRESENTATION_OPTIONS,
-  PROJECT_COLOR_OPTIONS,
-  type ProjectMedia,
-  type ProjectTag,
-} from "@/src/lib/cms/types";
-
-type AdminProjectInput = {
-  title: string;
-  slug: string;
-  colorClass: (typeof PROJECT_COLOR_OPTIONS)[number]["value"];
-  digest: string;
-  summary: string;
-  status: "draft" | "published";
-  tags: ProjectTag[];
-  media: ProjectMedia[];
-};
+import { adminProjectSchema, type AdminProjectInput } from "@/src/lib/cms/project-form";
 
 function assertInput(value: unknown): AdminProjectInput {
-  if (!value || typeof value !== "object") throw new Error("Invalid project payload");
-  const input = value as Record<string, unknown>;
-  const status = input.status === "published" ? "published" : "draft";
-  const title = typeof input.title === "string" ? input.title.trim() : "";
-  const slug = typeof input.slug === "string" ? input.slug.trim() : "";
-  if (!title || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug))
-    throw new Error("Title and URL slug required");
-
-  const tagsInput = Array.isArray(input.tags) ? input.tags : [];
-  const mediaInput = Array.isArray(input.media) ? input.media : [];
-  const parsedTags = tagsInput.filter(isProjectTag);
-  const parsedMedia = mediaInput.filter(isProjectMedia);
-  const covers = parsedMedia.filter((item) => item.role === "cover");
-  if (covers.length !== 1 || covers[0].mediaType !== "image")
-    throw new Error("Choose one image as the cover");
-  const colorClass = typeof input.colorClass === "string" ? input.colorClass : "bg-dora-pink";
-  if (!isProjectColor(colorClass)) throw new Error("Choose a valid project color");
-
-  return {
-    title,
-    slug,
-    colorClass,
-    digest: typeof input.digest === "string" ? input.digest : "",
-    summary: typeof input.summary === "string" ? input.summary : "",
-    status,
-    tags: parsedTags,
-    media: parsedMedia,
-  };
-}
-
-function isProjectColor(value: unknown): value is AdminProjectInput["colorClass"] {
-  return (
-    typeof value === "string" && PROJECT_COLOR_OPTIONS.some((option) => option.value === value)
-  );
-}
-
-function isProjectTag(value: unknown): value is ProjectTag {
-  if (!value || typeof value !== "object") return false;
-  const item = value as Record<string, unknown>;
-  return [item.key, item.label, item.className].every((field) => typeof field === "string");
-}
-
-function isProjectMedia(value: unknown): value is ProjectMedia {
-  if (!value || typeof value !== "object") return false;
-  const item = value as Record<string, unknown>;
-  return (
-    typeof item.id === "string" &&
-    typeof item.src === "string" &&
-    typeof item.objectKey === "string" &&
-    typeof item.publicUrl === "string" &&
-    (item.role === "cover" || item.role === "gallery") &&
-    (item.mediaType === "image" || item.mediaType === "video") &&
-    typeof item.sortOrder === "number" &&
-    MEDIA_PRESENTATION_OPTIONS.some((option) => option.value === item.className)
-  );
+  const result = adminProjectSchema.safeParse(value);
+  if (!result.success)
+    throw new Error(result.error.issues[0]?.message ?? "Invalid project payload");
+  return result.data;
 }
 
 export function parseAdminProjectInput(input: unknown) {
