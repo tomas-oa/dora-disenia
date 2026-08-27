@@ -12,8 +12,7 @@
     "lint": "oxlint .",
     "format": "oxfmt --no-error-on-unmatched-pattern \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" astro.config.mjs wrangler.jsonc package.json tsconfig.json",
     "format:check": "oxfmt --check --no-error-on-unmatched-pattern \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.css\" astro.config.mjs wrangler.jsonc package.json tsconfig.json",
-    "deploy": "wrangler types && astro build && wrangler deploy",
-    "cms:seed": "bun scripts/generate-cms-seed.ts"
+    "deploy": "wrangler types && astro build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.2.5",

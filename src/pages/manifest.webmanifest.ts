@@ -9,6 +9,6 @@ export const GET: APIRoute = () => {
     display: "standalone",
     background_color: "#fffcf7",
     theme_color: "#fffcf7",
-    icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
+    icons: [{ src: "/media/icon.svg", sizes: "any", type: "image/svg+xml" }],
   });
 };

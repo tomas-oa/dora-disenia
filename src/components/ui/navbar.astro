@@ -1,7 +1,6 @@
 ---
 import { clsx } from "clsx";
 
-import { ICON_ARROW_DOWN } from "@/constants";
 
 interface Props {
   showLogo?: boolean;
@@ -22,12 +21,12 @@ const { showLogo = true, className, hrefBase = "" } = Astro.props;
   )}
 >
   <a class={clsx(!showLogo && "invisible")} href={`${hrefBase}/`}>
-    <img draggable="false" src="/ui/navbar/logo_dora.svg" alt="dora logo" class="invert w-22" />
+    <img draggable="false" src="/media/ui/navbar/logo_dora.svg" alt="dora logo" class="invert w-22" />
   </a>
 
   <article class="flex flex-row gap-12 md:gap-28 text-dora-white">
     <a href={`${hrefBase}/#proyectos`}>Proyectos</a>
     <a href={`${hrefBase}/#contacto`}>Contacto</a>
-    <a download href={`${hrefBase}/cv.pdf`}>CV <span class="inline-block">{ICON_ARROW_DOWN}</span></a>
+    <a download href={`${hrefBase}/media/cv.pdf`}>CV <span class="inline-block">↓</span></a>
   </article>
 </nav>

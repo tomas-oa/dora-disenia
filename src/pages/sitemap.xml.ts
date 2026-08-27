@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { env } from "cloudflare:workers";
 
-import { BASE_URL } from "@/constants";
+import { BASE_URL } from "@/src/lib/site";
 import { getProjects } from "@/src/lib/cms/data";
 
 export const prerender = false;

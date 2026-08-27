@@ -1,60 +1,12 @@
 import { asc, eq, inArray } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 
-import { PROJECTS } from "@/constants";
 import { cmsSchema, media, projectTags, projects, tags } from "@/src/lib/cms/schema";
 import type { ProjectMedia, ProjectTag, PublicProject } from "@/src/lib/cms/types";
 
-type CmsEnv = Partial<Cloudflare.Env>;
-
-const legacyProjects: PublicProject[] = PROJECTS.map((project) => ({
-  id: `legacy-${project.slug}`,
-  title: project.title,
-  slug: project.slug,
-  published: project.published,
-  status: project.published ? "published" : "draft",
-  color: project.color,
-  content: project.content,
-  tags: [...(project.tags as readonly ProjectTag[])],
-  storage: {
-    cover: project.storage.cover,
-    coverMedia: {
-      id: `legacy-${project.slug}-cover`,
-      src: project.storage.cover,
-      alt: project.title,
-      className: "",
-      mediaType: "image",
-      role: "cover",
-      sortOrder: -1,
-      objectKey: project.storage.cover.replace(/^\//, ""),
-      publicUrl: project.storage.cover,
-      mimeType: null,
-      sizeBytes: null,
-      width: null,
-      height: null,
-    },
-    images: project.storage.images.map((image, mediaIndex) => ({
-      id: `legacy-${project.slug}-${mediaIndex}`,
-      src: image.src,
-      alt: image.alt,
-      className: image.className,
-      mediaType: image.src.endsWith(".mp4") ? "video" : "image",
-      role: "gallery",
-      sortOrder: mediaIndex,
-      objectKey: image.src.replace(/^\//, ""),
-      publicUrl: image.src,
-      mimeType: null,
-      sizeBytes: null,
-      width: null,
-      height: null,
-    })),
-  },
-}));
-
-void cmsSchema;
-
-function getDb(env: CmsEnv) {
-  return env.DB ? drizzle(env.DB, { schema: cmsSchema }) : null;
+function getDb(env: Cloudflare.Env) {
+  if (!env.DB) throw new Error("D1 binding missing");
+  return drizzle(env.DB, { schema: cmsSchema });
 }
 
 function mapMedia(row: typeof media.$inferSelect): ProjectMedia {
@@ -75,9 +27,8 @@ function mapMedia(row: typeof media.$inferSelect): ProjectMedia {
   };
 }
 
-async function readProjects(env: CmsEnv, includeDrafts: boolean) {
+async function readProjects(env: Cloudflare.Env, includeDrafts: boolean) {
   const db = getDb(env);
-  if (!db) return null;
 
   const projectRows = await db
     .select()
@@ -124,23 +75,22 @@ async function readProjects(env: CmsEnv, includeDrafts: boolean) {
   });
 }
 
-export async function getProjects(env: CmsEnv, includeDrafts = false) {
-  try {
-    const result = await readProjects(env, includeDrafts);
-    return result ?? legacyProjects.filter((project) => includeDrafts || project.published);
-  } catch (error) {
-    console.error("CMS read failed", error);
-    return legacyProjects.filter((project) => includeDrafts || project.published);
-  }
+export async function getProjects(env: Cloudflare.Env, includeDrafts = false) {
+  return readProjects(env, includeDrafts);
 }
 
-export async function getProjectBySlug(env: CmsEnv, slug: string, includeDrafts = false) {
+export async function getTags(env: Cloudflare.Env): Promise<ProjectTag[]> {
+  return getDb(env)
+    .select({ key: tags.key, label: tags.label, className: tags.className })
+    .from(tags)
+    .orderBy(asc(tags.sortOrder), asc(tags.key));
+}
+
+export async function getProjectBySlug(env: Cloudflare.Env, slug: string, includeDrafts = false) {
   const project = (await getProjects(env, includeDrafts)).find((item) => item.slug === slug);
   return project ?? null;
 }
 
-export async function getProjectById(env: CmsEnv, id: string) {
+export async function getProjectById(env: Cloudflare.Env, id: string) {
   return (await getProjects(env, true)).find((item) => item.id === id) ?? null;
 }
-
-export { legacyProjects };

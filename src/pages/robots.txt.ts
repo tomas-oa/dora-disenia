@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { BASE_URL } from "@/constants";
+import { BASE_URL } from "@/src/lib/site";
 
 export const GET: APIRoute = () => {
   const sitemapUrl = new URL("sitemap.xml", BASE_URL);

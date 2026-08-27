@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "@fontsource-variable/host-grotesk";
-@source "../../constants.ts";
+@source inline("bg-dora-red bg-dora-sky bg-dora-pink bg-dora-yellow bg-black text-black text-white");
 
 @theme {
   --font-sans: "Host Grotesk Variable", system-ui, sans-serif;
@@ -49,7 +49,7 @@
 
 @font-face {
   font-family: "coolvetica";
-  src: url("/fonts/CoolveticaBk-Regular.ttf") format("truetype");
+  src: url("/media/fonts/CoolveticaBk-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -57,7 +57,7 @@
 
 @font-face {
   font-family: "coolvetica";
-  src: url("/fonts/CoolveticaRg-Regular.ttf") format("truetype");
+  src: url("/media/fonts/CoolveticaRg-Regular.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;

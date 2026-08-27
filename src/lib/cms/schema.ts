@@ -31,6 +31,7 @@ export const tags = sqliteTable("tags", {
   key: text("key").primaryKey(),
   label: text("label").notNull(),
   className: text("class_name").notNull(),
+  sortOrder: integer("sort_order").notNull().default(0),
 });
 
 export const projectTags = sqliteTable(

@@ -1,7 +1,6 @@
-import { eq, max } from "drizzle-orm";
+import { eq, inArray, max } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 
-import { TAGS_ITERABLE } from "@/constants";
 import { media, projectTags, projects, tags } from "@/src/lib/cms/schema";
 import {
   MEDIA_PRESENTATION_OPTIONS,
@@ -61,9 +60,7 @@ function isProjectColor(value: unknown): value is AdminProjectInput["colorClass"
 function isProjectTag(value: unknown): value is ProjectTag {
   if (!value || typeof value !== "object") return false;
   const item = value as Record<string, unknown>;
-  return TAGS_ITERABLE.some(
-    (tag) => tag.key === item.key && tag.label === item.label && tag.className === item.className,
-  );
+  return [item.key, item.label, item.className].every((field) => typeof field === "string");
 }
 
 function isProjectMedia(value: unknown): value is ProjectMedia {
@@ -92,6 +89,10 @@ export async function saveProject(env: Cloudflare.Env, projectId: string, value:
   const now = new Date();
   const project = await db.select().from(projects).where(eq(projects.id, projectId)).get();
   if (!project) throw new Error("Project not found");
+  const tagKeys = [...new Set(input.tags.map((tag) => tag.key))];
+  const tagRows =
+    tagKeys.length > 0 ? await db.select().from(tags).where(inArray(tags.key, tagKeys)) : [];
+  if (tagRows.length !== tagKeys.length) throw new Error("Choose valid project tags");
   const existingMedia = await db.select().from(media).where(eq(media.projectId, projectId));
   const retainedObjectKeys = new Set(input.media.map((item) => item.objectKey));
   const removedObjectKeys = existingMedia
@@ -115,16 +116,7 @@ export async function saveProject(env: Cloudflare.Env, projectId: string, value:
       .where(eq(projects.id, projectId)),
     db.delete(projectTags).where(eq(projectTags.projectId, projectId)),
     db.delete(media).where(eq(media.projectId, projectId)),
-    ...input.tags.map((tag) =>
-      db
-        .insert(tags)
-        .values(tag)
-        .onConflictDoUpdate({
-          target: tags.key,
-          set: { label: tag.label, className: tag.className },
-        }),
-    ),
-    ...input.tags.map((tag) => db.insert(projectTags).values({ projectId, tagKey: tag.key })),
+    ...tagRows.map((tag) => db.insert(projectTags).values({ projectId, tagKey: tag.key })),
     ...input.media.map((item) =>
       db.insert(media).values({
         id: item.id,
