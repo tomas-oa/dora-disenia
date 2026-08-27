@@ -18,6 +18,7 @@
 
 # generated/build metadata
 *.tsbuildinfo
+/worker-configuration.d.ts
 /.next/
 /.vercel/
 /next-env.d.ts
