@@ -9,7 +9,13 @@ bun install
 bun dev
 ```
 
-Open http://localhost:4321.
+Open https://dora-disenia.localhost. Portless may ask for permission once to create and trust its local HTTPS certificate.
+
+To bypass Portless and use Astro's default port directly:
+
+```sh
+bun run dev:app
+```
 
 ## Verification
 
