@@ -40,6 +40,12 @@ export default defineConfig({
   integrations: [preact(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      optimizeDeps: {
+        noDiscovery: true,
+        exclude: ["astro/assets", "astro/assets/runtime"],
+      },
+    },
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./", import.meta.url)),
