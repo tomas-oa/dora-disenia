@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   index,
   integer,
@@ -67,7 +68,12 @@ export const media = sqliteTable(
     height: integer("height"),
     createdAt: integer("created_at", { mode: "timestamp_ms" }).notNull(),
   },
-  (table) => [index("media_project_order_idx").on(table.projectId, table.role, table.sortOrder)],
+  (table) => [
+    index("media_project_order_idx").on(table.projectId, table.role, table.sortOrder),
+    uniqueIndex("media_one_cover_per_project_idx")
+      .on(table.projectId)
+      .where(sql`${table.role} = 'cover'`),
+  ],
 );
 
 export const cmsSchema = { projects, tags, projectTags, media };
