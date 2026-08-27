@@ -1,5 +1,6 @@
 ---
 import Layout from "@/src/layouts/layout.astro";
+import ProjectList from "@/src/components/admin/project-list";
 import { getProjects } from "@/src/lib/cms/data";
 import { env } from "cloudflare:workers";
 import { ADMIN_HOST } from "@/src/lib/cms/hosts";
@@ -14,57 +15,6 @@ const apiPath = Astro.url.hostname === ADMIN_HOST ? "/api" : "/api/admin";
     <header class="flex items-end justify-between gap-4 border-b border-black pb-4"><div><p class="font-display text-sm uppercase">Dora Diseña</p><h1 class="font-display text-5xl">Editor</h1></div><form action={`${apiPath}/projects`} method="post"><button class="rounded-full bg-black px-5 py-2 text-white" type="submit">Nuevo proyecto</button></form></header>
     <p class="text-sm">Contenido publicado aparece en el portafolio. Los borradores solo son visibles en vista previa.</p>
     <p class="text-sm">Arrastra proyectos para cambiar el orden de la portada. El cambio se guarda automáticamente.</p>
-    <section id="project-list" class="flex flex-col divide-y divide-black border-y">
-      {projects.map((project) => <article draggable="true" data-project-card data-project-id={project.id} class="flex items-center gap-3 py-5"><button type="button" data-drag-handle class="cursor-grab text-xl leading-none" aria-label="Arrastrar para reordenar">⠿</button><a href={`${adminPath}/projects/${project.id}`} class="flex min-w-0 flex-1 items-center justify-between gap-4"><span><strong class="font-display text-2xl">{project.title}</strong><span class="ml-3 text-sm">/{project.slug}</span></span><span class={project.published ? "text-green-700" : "text-zinc-500"}>{project.published ? "Publicado" : "Borrador"}</span></a><div class="flex gap-2 text-sm"><button type="button" data-move="up" class="underline">Subir</button><button type="button" data-move="down" class="underline">Bajar</button></div></article>)}
-    </section>
-    <output id="order-status" class="text-sm" aria-live="polite"></output>
+    <ProjectList projects={projects} adminPath={adminPath} apiPath={apiPath} client:load />
   </main>
 </Layout>
-
-<script define:vars={{ apiPath }}>
-  const projectList = document.querySelector("#project-list");
-  const orderStatus = document.querySelector("#order-status");
-
-  const projectIds = () => [...(projectList?.querySelectorAll("[data-project-card]") ?? [])].map((card) => card.dataset.projectId);
-  const saveOrder = async () => {
-    if (!(orderStatus instanceof HTMLOutputElement)) return;
-    orderStatus.textContent = "Guardando orden…";
-    try {
-      const response = await fetch(`${apiPath}/projects/order`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ projectIds: projectIds() }) });
-      const result = await response.json();
-      if (!response.ok) throw new Error(result.error);
-      orderStatus.textContent = "Orden guardado.";
-    } catch (error) {
-      orderStatus.textContent = error instanceof Error ? error.message : "No se pudo guardar el orden.";
-    }
-  };
-
-  let draggedCard;
-  projectList?.addEventListener("dragstart", (event) => {
-    const card = event.target.closest("[data-project-card]");
-    if (!(card instanceof HTMLElement)) return;
-    draggedCard = card;
-    card.classList.add("opacity-50");
-  });
-  projectList?.addEventListener("dragend", () => {
-    draggedCard?.classList.remove("opacity-50");
-    draggedCard = undefined;
-    void saveOrder();
-  });
-  projectList?.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    const target = event.target.closest("[data-project-card]");
-    if (!(target instanceof HTMLElement) || !draggedCard || target === draggedCard) return;
-    const after = event.clientY > target.getBoundingClientRect().top + target.offsetHeight / 2;
-    projectList.insertBefore(draggedCard, after ? target.nextSibling : target);
-  });
-  projectList?.addEventListener("click", (event) => {
-    const target = event.target;
-    if (!(target instanceof HTMLButtonElement)) return;
-    const card = target.closest("[data-project-card]");
-    if (!(card instanceof HTMLElement)) return;
-    if (target.dataset.move === "up" && card.previousElementSibling) projectList.insertBefore(card, card.previousElementSibling);
-    if (target.dataset.move === "down" && card.nextElementSibling) projectList.insertBefore(card, card.nextElementSibling.nextElementSibling);
-    if (target.dataset.move) void saveOrder();
-  });
-</script>
