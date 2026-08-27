@@ -37,11 +37,10 @@ export default function CvEditor({ apiPath, cvUrl, sizeBytes }: Props) {
       const response = await fetch(`${apiPath}/cv`, { method: "POST", body: data });
       const body = (await response.json()) as {
         error?: string;
-        publicUrl?: string;
-        sizeBytes?: number;
+        publicUrl: string;
+        sizeBytes: number;
       };
-      if (!response.ok || !body.publicUrl || body.sizeBytes === undefined)
-        throw new Error(body.error ?? "No se pudo actualizar el CV.");
+      if (!response.ok) throw new Error(body.error ?? "No se pudo actualizar el CV.");
       setCurrentUrl(body.publicUrl);
       setCurrentSize(body.sizeBytes);
       setMessage("CV actualizado.");
