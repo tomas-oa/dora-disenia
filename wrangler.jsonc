@@ -21,6 +21,7 @@
     {
       "binding": "MEDIA",
       "bucket_name": "dora-disenia-media",
+      "remote": true,
     },
   ],
   "vars": {

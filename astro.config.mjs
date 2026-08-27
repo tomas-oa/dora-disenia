@@ -1,6 +1,6 @@
 import { fileURLToPath } from "node:url";
 
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
 import preact from "@astrojs/preact";
 import sitemap from "@astrojs/sitemap";
@@ -11,6 +11,27 @@ export default defineConfig({
   trailingSlash: "ignore",
   output: "server",
   session: false,
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: "coolvetica",
+      cssVariable: "--font-coolvetica",
+      options: {
+        variants: [
+          {
+            weight: 400,
+            style: "normal",
+            src: ["./src/assets/fonts/CoolveticaBk-Regular.ttf"],
+          },
+          {
+            weight: 500,
+            style: "normal",
+            src: ["./src/assets/fonts/CoolveticaRg-Regular.ttf"],
+          },
+        ],
+      },
+    },
+  ],
   adapter: cloudflare({ imageService: "compile" }),
   integrations: [preact(), sitemap()],
   vite: {

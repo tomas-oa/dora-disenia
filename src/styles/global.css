@@ -4,7 +4,7 @@
 
 @theme {
   --font-sans: "Host Grotesk Variable", system-ui, sans-serif;
-  --font-display: "coolvetica", system-ui, sans-serif;
+  --font-display: var(--font-coolvetica);
   --font-mono: monospace;
 
   --color-dora-white: #fffcf7;
@@ -45,20 +45,4 @@
 
 @utility button {
   @apply text-dora-white bg-dora-blue hover:bg-dora-blue/80 focus:ring-dora-blue/40 relative inline-flex cursor-pointer flex-row items-center justify-center rounded-full px-4.5 py-2.5 text-base font-medium shadow-sm transition-colors duration-300 ease-in-out focus:ring-2 disabled:pointer-events-none disabled:cursor-default disabled:opacity-20 aria-busy:cursor-wait aria-disabled:pointer-events-none aria-disabled:cursor-default aria-disabled:opacity-20 motion-reduce:transition-none;
-}
-
-@font-face {
-  font-family: "coolvetica";
-  src: url("/media/fonts/CoolveticaBk-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "coolvetica";
-  src: url("/media/fonts/CoolveticaRg-Regular.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
 }

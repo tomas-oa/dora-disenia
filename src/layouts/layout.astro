@@ -1,6 +1,7 @@
 ---
 import "@/src/styles/global.css";
 
+import { Font } from "astro:assets";
 import { BASE_URL } from "@/src/lib/site";
 
 interface Props {
@@ -39,6 +40,7 @@ const canonicalUrl = new URL(Astro.url.pathname, BASE_URL).toString();
       property="og:image"
       content={`${BASE_URL}/media/ui/hero/logo_desktop.svg`}
     />
+    <Font cssVariable="--font-coolvetica" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
